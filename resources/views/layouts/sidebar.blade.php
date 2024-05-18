@@ -66,6 +66,15 @@
                           </a>
                       </li>
                       <li class="nav-item">
+                          <a href="{{ route('profil') }}"
+                              class="nav-link  {{ Request::segment(1) == 'profil' ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-user"></i>
+                              <p>
+                                  Profil
+                              </p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
                           <a href="{{ route('gaji-index') }}"
                               class="nav-link  {{ Request::segment(1) == 'gaji-index' ? 'active' : '' }}{{ Request::segment(1) == 'gaji' ? 'active' : '' }}">
                               <i class="nav-icon fas fa-hand-holding-dollar"></i>
@@ -110,6 +119,7 @@
                                 {{ Request::segment(2) == 'status-pekerjaan' ? 'menu-is-opening menu-open' : '' }}
                                 {{ Request::segment(2) == 'tingkat-pekerjaan' ? 'menu-is-opening menu-open' : '' }}
                                 {{ Request::segment(2) == 'kategori' ? 'menu-is-opening menu-open' : '' }}
+                                {{ Request::segment(2) == 'tunjangan-pendidikan' ? 'menu-is-opening menu-open' : '' }}
                               ">
                               <a href="#"
                                   class="nav-link
@@ -119,9 +129,10 @@
                                   {{ Request::segment(2) == 'status-pekerjaan' ? 'active' : '' }}
                                   {{ Request::segment(2) == 'tingkat-pekerjaan' ? 'active' : '' }}
                                   {{ Request::segment(2) == 'kategori' ? 'active' : '' }}
+                                  {{ Request::segment(2) == 'tunjangan-pendidikan' ? 'active' : '' }}
                                   ">
                                   <i class="nav-icon fa-solid fa-file-lines"></i>
-                                  <p>
+                                <p>
                                       Master
                                       <i class="fas fa-angle-left right"></i>
                                   </p>
@@ -193,6 +204,19 @@
                                               <i class="far fa-circle nav-icon ml-2"></i>
                                           @endif
                                           <p>Kategori</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.tunjangan-pendidikan') }}"
+                                          class="nav-link 
+                                      {{ Request::segment(2) == 'tunjangan-pendidikan' ? 'active' : '' }}
+                                      ">
+                                          @if (Request::segment(2) == 'tunjangan-pendidikan')
+                                              <i class="far fa-dot-circle nav-icon ml-2"></i>
+                                          @else
+                                              <i class="far fa-circle nav-icon ml-2"></i>
+                                          @endif
+                                          <p>Tunjangan Pendidikan</p>
                                       </a>
                                   </li>
                               </ul>

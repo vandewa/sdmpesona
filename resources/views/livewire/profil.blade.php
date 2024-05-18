@@ -1,0 +1,291 @@
+<div>
+    <x-slot name="header">
+        <div class="mb-2 row">
+            <div class="col-sm-6">
+                <h1 class="m-0">Data Diri</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active">Data Diri</li>
+                    {{-- <li class="breadcrumb-item"><a href="#">Jenis UTTP</a></li> --}}
+                </ol>
+            </div>
+        </div>
+    </x-slot>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+
+                    <!-- Profile Image -->
+                    <div class="card card-info card-outline">
+                        <div class="card-body box-profile">
+                            <div class="text-center">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('soul.png') }}"
+                                    alt="User profile picture">
+                            </div>
+
+                            <h3 class="profile-username text-center">{{ $form['name'] ?? '-' }}</h3>
+
+
+                            <ul class="list-group list-group-unbordered mb-3 mt-5">
+                                <li class="list-group-item">
+                                    <b>ID Karyawan</b> <br>
+                                    <span>{{ $form['id_karyawan'] ?? '-' }}</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Jabatan</b> <br>
+                                    <span>{{ $form['jabatan']['nama'] ?? '' }}</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Status</b> <br>
+                                    <span>{{ $form['statusnya']['nama'] ?? '' }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="active tab-pane" id="settings">
+                                    <form class="form-horizontal" wire:submit='save'>
+                                        <legend>Data Diri</legend>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row mb-2">
+                                                    <label for="inputName" class="col-sm-4 col-form-label">Nama</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control"
+                                                            wire:model.blur='form.name' placeholder="Nama Lengkap">
+                                                        @error('form.nama')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <label for="inputName" class="col-sm-4 col-form-label">NIK</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control"
+                                                            wire:model.blur='form.nik'
+                                                            placeholder="Nomor Induk Kependudukan">
+                                                        @error('form.nik')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <label for="inputName" class="col-sm-4 col-form-label">NPWP</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control"
+                                                            wire:model.blur='form.npwp' placeholder="Nomor NPWP">
+                                                        @error('form.npwp')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-2">
+                                                    <label for="inputName" class="col-sm-4 col-form-label">Jenis
+                                                        Kelamin</label>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-control" wire:model='form.jk'>
+                                                            <option value="">Pilih
+                                                                Jenis Kelamin</option>
+                                                            <option value="l">Laki-laki
+                                                            </option>
+                                                            <option value="p">Perempuan
+                                                            </option>
+                                                        </select>
+                                                        @error('form.jk')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-2">
+                                                    <label for="inputName" class="col-sm-4 col-form-label">Tanggal
+                                                        Lahir</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="date" class="form-control"
+                                                            wire:model='form.tgl_lahir' placeholder="tgl_lahir">
+                                                        @error('form.tgl_lahir')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-2">
+                                                    <label for="inputEmail"
+                                                        class="col-sm-4 col-form-label">Email</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="email" class="form-control"
+                                                            wire:model='form.email' placeholder="Email">
+                                                        @error('form.email')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <label for="inputExperience"
+                                                        class="col-sm-4 col-form-label">Alamat</label>
+                                                    <div class="col-sm-8">
+                                                        <textarea name="alamat" rows="2" wire:model='form.alamat' class="form-control"></textarea>
+                                                        @error('form.alamat')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="row mb-2">
+                                                    <label for="inputName" class="col-sm-5 col-form-label">Nomor
+                                                        WhatsApp</label>
+                                                    <div class="col-sm-7">
+                                                        <input type="text" class="form-control"
+                                                            wire:model='form.telpon'
+                                                            placeholder="Contoh: 081xxxxxxxx">
+                                                        @error('form.telpon')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <label for="inputName" class="col-sm-5 col-form-label">Status
+                                                        Kawin</label>
+                                                    <div class="col-sm-7">
+                                                        <select class="form-control" wire:model='form.kawin_tp'>
+                                                            <option value="">Pilih
+                                                                Status Kawin</option>
+                                                            @foreach ($listKawin ?? [] as $item)
+                                                                <option value="{{ $item['com_cd'] }}">
+                                                                    {{ $item['code_nm'] }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('form.kawin_tp')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <label for="inputName" class="col-sm-5 col-form-label">Jumlah
+                                                        Anak</label>
+                                                    <div class="col-sm-7">
+                                                        <input type="text" class="form-control"
+                                                            wire:model='form.anak' placeholder="Jumlah Anak">
+                                                        @error('form.anak')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <label for="inputName" class="col-sm-5 col-form-label">Pendidikan
+                                                        Terakhir</label>
+                                                    <div class="col-sm-7">
+                                                        <select class="form-control"
+                                                            wire:model='form.tunjangan_pendidikan_id'>
+                                                            <option value="">Pilih
+                                                                Pendidikan</option>
+                                                            @foreach ($listPendidikan ?? [] as $item)
+                                                                <option value="{{ $item['id'] }}">
+                                                                    {{ $item['nama'] }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('form.tunjangan_pendidikan_id')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <label for="inputName"
+                                                        class="col-sm-5 col-form-label">Bank</label>
+                                                    <div class="col-sm-7">
+                                                        <input type="text" class="form-control"
+                                                            wire:model='form.bank' placeholder="Nama Bank">
+                                                        @error('form.bank')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-2">
+                                                    <label for="inputName" class="col-sm-5 col-form-label">No
+                                                        Rekening</label>
+                                                    <div class="col-sm-7">
+                                                        <input type="text" class="form-control"
+                                                            wire:model='form.rekening' placeholder="Nomor Rekening">
+                                                        @error('form.rekening')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <center>
+                                                <h5>Ganti Password</h5>
+                                            </center>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row mb-2">
+                                                    <label for="inputName"
+                                                        class="col-sm-4 col-form-label">Password</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="password" class="form-control"
+                                                            wire:model='password'>
+                                                        @error('password')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row mb-2">
+                                                    <label for="inputName" class="col-sm-4 col-form-label">Konfirmasi
+                                                        Password</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="password" class="form-control"
+                                                            wire:model='password_confirmation'>
+                                                        @error('password_confirmation')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mb-2">
+                                            <div class="offset-sm-2 col-sm-8">
+                                                <button type="submit" class="btn btn-info">Update</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <!-- /.tab-pane -->
+                            </div>
+                            <!-- /.tab-content -->
+                        </div><!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

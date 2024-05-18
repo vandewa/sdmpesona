@@ -182,6 +182,21 @@
 
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript">
+        function sweetAlert2() {
+            Swal.fire(
+                'Berhasil!',
+                'Mengedit data.',
+                'success'
+            )
+        }
+
+        @if (session('edit'))
+            sweetAlert2();
+        @endif
+    </script>
 </body>
 
 </html>

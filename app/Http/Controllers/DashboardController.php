@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GantiPasswordValidation;
 use Carbon\Carbon;
 use App\Models\Gaji;
 use App\Models\User;
@@ -10,6 +11,7 @@ use App\Models\Pemeliharaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class DashboardController extends Controller
@@ -65,6 +67,20 @@ class DashboardController extends Controller
 
         return response()->download($pathSave)->deleteFileAfterSend(true);
 
+    }
+
+    public function password()
+    {
+        return view('ganti-password');
+    }
+
+    public function gantiPassword(GantiPasswordValidation $request)
+    {
+        User::find(auth()->user()->id)->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect()->back()->with('edit', 'oke');
     }
 
     public function logout(Request $request)

@@ -141,6 +141,28 @@
                                                                                     @enderror
                                                                                 </div>
                                                                             </div>
+                                                                            <div class="row mb-2">
+                                                                                <label for="inputName"
+                                                                                    class="col-sm-4 col-form-label">Pendidikan
+                                                                                    Terakhir</label>
+                                                                                <div class="col-sm-8">
+                                                                                    <select class="form-control"
+                                                                                        wire:model='form.tunjangan_pendidikan_id'>
+                                                                                        <option value="">Pilih
+                                                                                            Pendidikan</option>
+                                                                                        @foreach ($listPendidikan ?? [] as $item)
+                                                                                            <option
+                                                                                                value="{{ $item['id'] }}">
+                                                                                                {{ $item['nama'] }}
+                                                                                            </option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                    @error('form.tunjangan_pendidikan_id')
+                                                                                        <span
+                                                                                            class="form-text text-danger">{{ $message }}</span>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
 
 
 

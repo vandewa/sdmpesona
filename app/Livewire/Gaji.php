@@ -40,7 +40,7 @@ class Gaji extends Component
 
     public function mount($id = '')
     {
-        $user = User::find($id);
+        $user = User::with(['tunjanganPendidikan'])->find($id);
         $this->idnya = $id;
 
         $this->nama = $user->name;
@@ -48,6 +48,8 @@ class Gaji extends Component
         $this->form['gapok'] = $user->gapok_sekarang;
         $this->form['tanggal_penggajian'] = date('Y-m-d');
         $this->form['user_id'] = $id;
+
+        $this->form['tunjangan_pendidikan'] = $user->tunjanganPendidikan->nominal ?? "0";
 
         $this->form['jml_diterima_gapok'] = $this->form['gapok'] + $this->form['honor_siaran'];
 
@@ -180,7 +182,7 @@ class Gaji extends Component
 
     public function cetak($id)
     {
-        $data = ModelsGaji::with(['pegawai'])->find($id);
+        $data = ModelsGaji::with(['pegawai', 'tunjanganPendidikan'])->find($id);
         $bendahara = User::where('nama_jabatan_id', '7')->where('status', '1')->first();
 
         $path = public_path('template/gaji.docx');

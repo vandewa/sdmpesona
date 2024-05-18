@@ -2,19 +2,20 @@
 
 namespace App\Livewire;
 
-use App\Models\ComCode;
-use App\Models\NamaJabatan;
-use Livewire\Component;
 use App\Models\Role;
+use App\Models\ComCode;
+use Livewire\Component;
+use App\Models\NamaJabatan;
+use Illuminate\Support\Arr;
 use App\Models\StatusPekerjaan;
 use App\Models\TingkatPekerjaan;
 use App\Models\User as ModelsUser;
-use Illuminate\Support\Arr;
+use App\Models\TunjanganPendidikan;
 
 class User extends Component
 {
 
-    public $role, $listRole, $konfirmasi_password, $idHapus, $edit = false, $user, $listStatusPekerjaan, $listNamaJabatan, $listTingkatPekerjaanAwal, $listKawin;
+    public $role, $listRole, $konfirmasi_password, $idHapus, $edit = false, $user, $listStatusPekerjaan, $listNamaJabatan, $listTingkatPekerjaanAwal, $listKawin, $listPendidikan;
 
     public $form = [
         'name' => null,
@@ -43,6 +44,7 @@ class User extends Component
         'rekening' => null,
         'email' => null,
         'password' => null,
+        'tunjangan_pendidikan_id' => null,
     ];
 
 
@@ -57,14 +59,15 @@ class User extends Component
             $this->role = $data->roles()->first()->id ?? null;
             $this->edit = true;
             $this->user = $id;
-            $this->listRole = $this->ambilRole();
-            $this->listStatusPekerjaan = StatusPekerjaan::all();
-            $this->listNamaJabatan = $this->ambilNamaJabatan();
-            $this->listTingkatPekerjaanAwal = $this->ambilTingkatPekerjaanAwal();
-            $this->listKawin = $this->ambilKawin();
+
+
         }
-
-
+        $this->listRole = $this->ambilRole();
+        $this->listStatusPekerjaan = StatusPekerjaan::all();
+        $this->listNamaJabatan = $this->ambilNamaJabatan();
+        $this->listTingkatPekerjaanAwal = $this->ambilTingkatPekerjaanAwal();
+        $this->listKawin = $this->ambilKawin();
+        $this->listPendidikan = $this->ambilTunjanganPendidikan();
 
     }
 
@@ -92,6 +95,13 @@ class User extends Component
     {
         return TingkatPekerjaan::all()->toArray();
     }
+
+    public function ambilTunjanganPendidikan()
+    {
+        return TunjanganPendidikan::all()->toArray();
+    }
+
+
 
 
     public function save()
@@ -122,6 +132,9 @@ class User extends Component
             'form.name' => 'required',
             'form.email' => 'required|unique:users,email',
             'role' => 'required',
+            'form.tgl_penetapan_jabatan_awal' => 'required',
+            'form.tgl_penetapan_gapok_awal' => 'required',
+            'form.tunjangan_pendidikan_id' => 'required',
         ]);
 
         $this->form['password'] = bcrypt($this->form['password']);
@@ -136,8 +149,9 @@ class User extends Component
             'form.name' => 'required',
             'form.email' => 'required|email|unique:users,email,' . $this->user,
             'role' => 'required',
-            'tgl_penetapan_jabatan_awal' => 'required',
-            'tgl_penetapan_gapok_awal' => 'required',
+            'form.tgl_penetapan_jabatan_awal' => 'required',
+            'form.tgl_penetapan_gapok_awal' => 'required',
+            'form.tunjangan_pendidikan_id' => 'required',
         ]);
 
         if ($this->form['password'] ?? "") {
@@ -157,10 +171,6 @@ class User extends Component
     {
         return view('livewire.user', [
             'listRole' => $this->ambilRole(),
-            // 'listStatusPekerjaan' => $this->ambilStatusPekerjaan(),
-            // 'listNamaJabatan' => $this->ambilNamaJabatan(),
-            // 'listTingkatPekerjaanAwal' => $this->ambilTingkatPekerjaanAwal(),
-            // 'listKawin' => $this->ambilKawin(),
         ]);
     }
 }

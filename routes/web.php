@@ -25,9 +25,10 @@ use App\Livewire\GajiIndex;
 use App\Livewire\Master\NamaJabatan;
 use App\Livewire\Master\StatusPekerjaan;
 use App\Livewire\Master\TingkatPekerjaan;
+use App\Livewire\Master\TunjanganPendidikan;
 use App\Livewire\PerubahanGaji;
 use App\Livewire\PerubahanJabatan;
-
+use App\Livewire\Profil;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,8 @@ Route::middleware([
     // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/logout', [DashboardController::class, 'logout'])->name('logout');
     Route::post('/cetak', [DashboardController::class, 'cetak'])->name('cetak');
+    Route::get('ganti-password', [DashboardController::class, 'password'])->name('password');
+    Route::post('/ganti-password', [DashboardController::class, 'gantiPassword'])->name('ganti.password');
 
     Route::get('dashboard', Dashboard::class)->name('dashboard');
 
@@ -78,6 +81,7 @@ Route::middleware([
         Route::get('status-pekerjaan', StatusPekerjaan::class)->name('status-pekerjaan');
         Route::get('tingkat-pekerjaan', TingkatPekerjaan::class)->name('tingkat-pekerjaan');
         Route::get('kategori', Kategori::class)->name('kategori');
+        Route::get('tunjangan-pendidikan', TunjanganPendidikan::class)->name('tunjangan-pendidikan');
 
     });
 
@@ -93,5 +97,7 @@ Route::middleware([
     Route::get('file', ManagementFile::class)->name('file');
     Route::get('gaji-index', GajiIndex::class)->name('gaji-index');
     Route::get('gaji/{id?}', Gaji::class)->name('gaji');
+    Route::get('profil', Profil::class)->name('profil');
+
 
 });
