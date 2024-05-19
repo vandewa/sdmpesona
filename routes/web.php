@@ -2,6 +2,7 @@
 
 use App\Livewire\ManagementFile;
 use App\Livewire\Master\Kategori;
+use App\Livewire\PengajuanCuti;
 use App\Livewire\User;
 use App\Livewire\Kegiatan;
 use App\Livewire\Keuangan;
@@ -22,6 +23,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Gaji;
 use App\Livewire\GajiIndex;
+use App\Livewire\Master\Cuti;
+use App\Livewire\Master\CutiAlasanPenting;
 use App\Livewire\Master\NamaJabatan;
 use App\Livewire\Master\StatusPekerjaan;
 use App\Livewire\Master\TingkatPekerjaan;
@@ -81,6 +84,7 @@ Route::middleware([
         Route::get('status-pekerjaan', StatusPekerjaan::class)->name('status-pekerjaan');
         Route::get('tingkat-pekerjaan', TingkatPekerjaan::class)->name('tingkat-pekerjaan');
         Route::get('kategori', Kategori::class)->name('kategori');
+        Route::get('cuti-alasan-penting', CutiAlasanPenting::class)->name('cuti-alasan-penting');
         Route::get('tunjangan-pendidikan', TunjanganPendidikan::class)->name('tunjangan-pendidikan');
 
     });
@@ -98,6 +102,8 @@ Route::middleware([
     Route::get('gaji-index', GajiIndex::class)->name('gaji-index');
     Route::get('gaji/{id?}', Gaji::class)->name('gaji');
     Route::get('profil', Profil::class)->name('profil');
+    Route::get('cuti', Cuti::class)->name('cuti');
+    Route::get('pengajuan-cuti', PengajuanCuti::class)->name('pengajuan-cuti');
 
 
 });

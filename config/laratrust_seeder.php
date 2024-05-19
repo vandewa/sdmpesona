@@ -15,6 +15,15 @@ return [
         'superadmin' => [
             'users' => 'c,r,u,d',
         ],
+        'direktur' => [
+            'users' => 'c,r,u,d',
+        ],
+        'bendahara' => [
+            'users' => 'c,r,u,d',
+        ],
+        'staff' => [
+            'users' => 'c,r,u,d',
+        ],
     ],
 
     'permissions_map' => [

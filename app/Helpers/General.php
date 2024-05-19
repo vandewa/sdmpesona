@@ -8,6 +8,7 @@
 
 use Illuminate\Support\Facades\Storage;
 use App\Models\ComCode;
+use App\Models\Cuti;
 use App\Models\His\InvUnit;
 use App\Models\His\InvItemType;
 use App\Models\His\TrxUnitMedis;
@@ -421,4 +422,13 @@ if (!function_exists('bulanIndonesia')) {
         return $bulan[$angkaBulan];
     }
 
+}
+
+if (!function_exists('cekCuti')) {
+    function cekCuti()
+    {
+        $value = Cuti::where('status_st', 'STATUS_ST_01')->count();
+
+        return $value;
+    }
 }

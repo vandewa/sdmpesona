@@ -12,7 +12,15 @@ return new class extends Migration {
     {
         Schema::create('cutis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->string('cuti_tp')->nullable();
+            $table->string('cuti_alasan_penting_id')->nullable();
+            $table->date('tgl_mulai')->nullable();
+            $table->date('tgl_selesai')->nullable();
+            $table->longText('keterangan')->nullable();
+            $table->longText('partner_delegasi')->nullable();
+            $table->string('nomor_partner')->nullable();
+            $table->longText('alamat')->nullable();
             $table->timestamps();
         });
     }
