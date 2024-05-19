@@ -19,13 +19,20 @@ class Dashboard extends Component
 
     public function mount()
     {
-        $this->laki = User::where('jk', 'l')->count();
-        $this->perempuan = User::where('jk', 'p')->count();
-        $this->total = User::whereHas('jabatan')->where('status', '1')->count();
+        if (auth()->user()->hasRole(['superadmin', 'direktur'])) {
+            $laki = User::where('jk', 'l')->count();
+            $perempuan = User::where('jk', 'p')->count();
+            $total = User::whereHas('jabatan')->where('status', '1')->count();
 
-        $jml_diterima_gapok = Gaji::sum('jml_diterima_gapok');
-        $jml_diterima_tunjangan = Gaji::sum('jml_diterima_tunjangan');
-        $this->total_gaji = $jml_diterima_gapok + $jml_diterima_tunjangan;
+            $jml_diterima_gapok = Gaji::sum('jml_diterima_gapok');
+            $jml_diterima_tunjangan = Gaji::sum('jml_diterima_tunjangan');
+            $total_gaji = $jml_diterima_gapok + $jml_diterima_tunjangan;
+
+            return view('dashboard.index', compact('laki', 'perempuan', 'total', 'total_gaji'));
+        } else {
+            return redirect(route('profil'));
+        }
+
     }
 
     public function updated($property)
