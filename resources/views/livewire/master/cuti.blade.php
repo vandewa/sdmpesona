@@ -226,7 +226,7 @@
                                                                                             class="text-danger">*</small></label>
                                                                                     <div class="col-sm-8">
                                                                                         <select class="form-control"
-                                                                                            wire:model='persetujuanDirektur'
+                                                                                            wire:model.live='persetujuanDirektur'
                                                                                             @if ($cekPertujuanDirektur) disabled @endif>
                                                                                             <option value="">
                                                                                                 Pilih
@@ -244,6 +244,20 @@
                                                                                         @enderror
                                                                                     </div>
                                                                                 </div>
+                                                                                @if ($tampilKeterangan)
+                                                                                    <div class="row mb-2">
+                                                                                        <label for="inputExperience"
+                                                                                            class="col-sm-4 col-form-label">Keterangan
+                                                                                            Direktur</label>
+                                                                                        <div class="col-sm-8">
+                                                                                            <textarea rows="2" wire:model='form.keterangan_direktur' class="form-control"></textarea>
+                                                                                            @error('form.keterangan_direktur')
+                                                                                                <span
+                                                                                                    class="form-text text-danger">{{ $message }}</span>
+                                                                                            @enderror
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endif
                                                                             </div>
 
                                                                         </div>

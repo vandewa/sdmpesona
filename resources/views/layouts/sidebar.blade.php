@@ -56,93 +56,100 @@
               <nav class="mt-2">
                   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                       data-accordion="false">
-                      <li class="nav-item">
-                          <a href="{{ route('dashboard') }}"
-                              class="nav-link  {{ Request::segment(1) == 'dashboard' ? 'active' : '' }}{{ Request::segment(1) == '' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-home"></i>
-                              <p>
-                                  Dashboard
-                              </p>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="{{ route('profil') }}"
-                              class="nav-link  {{ Request::segment(1) == 'profil' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-user"></i>
-                              <p>
-                                  Profil
-                              </p>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="{{ route('cuti') }}"
-                              class="nav-link  {{ Request::segment(1) == 'cuti' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-address-book"></i>
-                              <p>
-                                  Cuti
-                              </p>
-                              @if (cekCuti() == 0)
-                                  <span class="badge badge-secondary ml-2">{{ cekCuti() }}</span>
-                              @else
-                                  <span class="badge badge-danger ml-2">{{ cekCuti() }}</span>
-                              @endif
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="{{ route('pengajuan-cuti') }}"
-                              class="nav-link  {{ Request::segment(1) == 'pengajuan-cuti' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-address-book"></i>
-                              <p>
-                                  Pengajuan Cuti
-                              </p>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="{{ route('lihat-gaji') }}"
-                              class="nav-link  {{ Request::segment(1) == 'lihat-gaji' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-hand-holding-dollar"></i>
-                              <p>
-                                  Gaji
-                              </p>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="{{ route('gaji-index') }}"
-                              class="nav-link  {{ Request::segment(1) == 'gaji-index' ? 'active' : '' }}{{ Request::segment(1) == 'gaji' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-hand-holding-dollar"></i>
-                              <p>
-                                  Gaji
-                              </p>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="{{ route('perubahan-gaji') }}"
-                              class="nav-link  {{ Request::segment(1) == 'perubahan-gaji' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-file-invoice-dollar"></i>
-                              <p>
-                                  Perubahan Gaji
-                              </p>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="{{ route('perubahan-jabatan') }}"
-                              class="nav-link  {{ Request::segment(1) == 'perubahan-jabatan' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-id-card-alt"></i>
-                              <p>
-                                  Perubahan Jabatan
-                              </p>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="{{ route('file') }}"
-                              class="nav-link  {{ Request::segment(1) == 'file' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-file-upload"></i>
-                              <p>
-                                  Management File
-                              </p>
-                          </a>
-                      </li>
-                      @if (auth()->user()->hasRole('superadmin'))
+                      @if (auth()->user()->hasRole(['superadmin', 'direktur']))
+                          <li class="nav-item">
+                              <a href="{{ route('dashboard') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'dashboard' ? 'active' : '' }}{{ Request::segment(1) == '' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-home"></i>
+                                  <p>
+                                      Dashboard
+                                  </p>
+                              </a>
+                          </li>
+                      @endif
+
+                      @if (!auth()->user()->hasRole(['superadmin', 'direktur']))
+                          <li class="nav-item">
+                              <a href="{{ route('profil') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'profil' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-user"></i>
+                                  <p>
+                                      Profil
+                                  </p>
+                              </a>
+                          </li>
+
+                          <li class="nav-item">
+                              <a href="{{ route('pengajuan-cuti') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'pengajuan-cuti' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-address-book"></i>
+                                  <p>
+                                      Pengajuan Cuti
+                                  </p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('lihat-gaji') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'lihat-gaji' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-hand-holding-dollar"></i>
+                                  <p>
+                                      Gaji
+                                  </p>
+                              </a>
+                          </li>
+                      @endif
+
+                      @if (auth()->user()->hasRole(['superadmin', 'direktur']))
+                          <li class="nav-item">
+                              <a href="{{ route('cuti') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'cuti' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-address-book"></i>
+                                  <p>
+                                      Cuti
+                                  </p>
+                                  @if (cekCuti() == 0)
+                                      <span class="badge badge-secondary ml-2">{{ cekCuti() }}</span>
+                                  @else
+                                      <span class="badge badge-danger ml-2">{{ cekCuti() }}</span>
+                                  @endif
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('gaji-index') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'gaji-index' ? 'active' : '' }}{{ Request::segment(1) == 'gaji' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-hand-holding-dollar"></i>
+                                  <p>
+                                      Gaji
+                                  </p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('perubahan-gaji') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'perubahan-gaji' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                                  <p>
+                                      Perubahan Gaji
+                                  </p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('perubahan-jabatan') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'perubahan-jabatan' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-id-card-alt"></i>
+                                  <p>
+                                      Perubahan Jabatan
+                                  </p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('file') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'file' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-file-upload"></i>
+                                  <p>
+                                      Management File
+                                  </p>
+                              </a>
+                          </li>
                           <li
                               class="nav-item
                                 {{ Request::segment(2) == 'user-index' ? 'menu-is-opening menu-open' : '' }}

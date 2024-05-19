@@ -16,7 +16,7 @@ class Cuti extends Component
 
     use WithPagination;
 
-    public $idHapus, $edit = false, $idnya, $cari, $listJenisCuti, $listStatus, $listCutiAlasanPenting, $jenisCutiAlasanPenting = false, $cekTL = false, $persetujuanDirektur, $cekPertujuanDirektur;
+    public $idHapus, $edit = false, $idnya, $cari, $listJenisCuti, $listStatus, $listCutiAlasanPenting, $jenisCutiAlasanPenting = false, $cekTL = false, $persetujuanDirektur, $cekPertujuanDirektur, $keteranganDirektur, $tampilKeterangan = false;
 
     public $form = [
         'user_id' => null,
@@ -30,6 +30,7 @@ class Cuti extends Component
         'nomor_partner' => null,
         'alamat' => null,
         'status_st' => null,
+        'keterangan_direktur' => null,
     ];
 
     public function mount()
@@ -131,6 +132,18 @@ class Cuti extends Component
         JS);
 
         return redirect(route('cuti'));
+    }
+
+    public function updated($property)
+    {
+        if ($property === 'persetujuanDirektur') {
+            if ($this->persetujuanDirektur == 'STATUS_ST_03') {
+                $this->tampilKeterangan = true;
+            } else {
+                $this->form['keterangan_direktur'] == null;
+                $this->tampilKeterangan = false;
+            }
+        }
     }
 
 
