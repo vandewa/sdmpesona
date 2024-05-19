@@ -98,6 +98,15 @@
                           </a>
                       </li>
                       <li class="nav-item">
+                          <a href="{{ route('lihat-gaji') }}"
+                              class="nav-link  {{ Request::segment(1) == 'lihat-gaji' ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-hand-holding-dollar"></i>
+                              <p>
+                                  Gaji
+                              </p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
                           <a href="{{ route('gaji-index') }}"
                               class="nav-link  {{ Request::segment(1) == 'gaji-index' ? 'active' : '' }}{{ Request::segment(1) == 'gaji' ? 'active' : '' }}">
                               <i class="nav-icon fas fa-hand-holding-dollar"></i>

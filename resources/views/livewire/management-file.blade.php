@@ -140,7 +140,7 @@
                                                                 <div class="card-tools">
                                                                     <select name="" class="form-control"
                                                                         id="" wire:model.live='idnya'>
-                                                                        <option value="">Semua</option>
+                                                                        <option value="">Semua Kategori</option>
                                                                         @foreach ($kategori as $item)
                                                                             <option value="{{ $item->id }}">
                                                                                 {{ $item->nama ?? '' }}</option>

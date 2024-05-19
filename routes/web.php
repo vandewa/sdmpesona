@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\LihatGaji;
 use App\Livewire\ManagementFile;
 use App\Livewire\Master\Kategori;
 use App\Livewire\PengajuanCuti;
@@ -104,6 +105,8 @@ Route::middleware([
     Route::get('profil', Profil::class)->name('profil');
     Route::get('cuti', Cuti::class)->name('cuti');
     Route::get('pengajuan-cuti', PengajuanCuti::class)->name('pengajuan-cuti');
+    Route::get('lihat-gaji', LihatGaji::class)->name('lihat-gaji');
+
 
 
 });
