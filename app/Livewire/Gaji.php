@@ -41,7 +41,7 @@ class Gaji extends Component
 
     public function mount($id = '')
     {
-        $user = User::with(['tunjanganPendidikan'])->find($id);
+        $user = User::with(['tunjanganPendidikan', 'tunjanganMasaKerja'])->find($id);
         $this->idnya = $id;
 
         $this->nama = $user->name;
@@ -51,6 +51,7 @@ class Gaji extends Component
         $this->form['user_id'] = $id;
 
         $this->form['tunjangan_pendidikan'] = $user->tunjanganPendidikan->nominal ?? "0";
+        $this->form['tunjangan_masa_kerja'] = $user->tunjanganMasaKerja->nominal ?? "0";
 
         $this->form['jml_diterima_gapok'] = $this->form['gapok'];
 

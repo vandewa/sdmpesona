@@ -308,7 +308,7 @@
                                                                     <hr>
                                                                     <div class="row">
                                                                         <div class="col-md-6">
-                                                                            <div class="row mb-2">
+                                                                            {{-- <div class="row mb-2">
                                                                                 <label for="inputEmail3"
                                                                                     class="col-sm-4 col-form-label">Status
                                                                                     Pekerjaan
@@ -332,7 +332,7 @@
                                                                                             class="form-text text-danger">{{ $message }}</span>
                                                                                     @enderror
                                                                                 </div>
-                                                                            </div>
+                                                                            </div> --}}
                                                                             <div class="row mb-2">
                                                                                 <label for="inputEmail3"
                                                                                     class="col-sm-4 col-form-label">Nama
@@ -360,7 +360,7 @@
                                                                             </div>
                                                                             <div class="row mb-2">
                                                                                 <label for="inputEmail3"
-                                                                                    class="col-sm-4 col-form-label">Tingkat
+                                                                                    class="col-sm-4 col-form-label">Status
                                                                                     Pekerjaan Awal
                                                                                     <small
                                                                                         class="text-danger">*</small>
@@ -553,7 +553,7 @@
                                                                                 </div>
                                                                                 <div class="row mb-1">
                                                                                     <label for="inputEmail3"
-                                                                                        class="col-sm-4 col-form-label">Tingkat
+                                                                                        class="col-sm-4 col-form-label">Status
                                                                                         Pekerjaan Sekarang
                                                                                         <small
                                                                                             class="text-danger">*</small>

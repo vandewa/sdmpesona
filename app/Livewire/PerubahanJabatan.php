@@ -53,6 +53,7 @@ class PerubahanJabatan extends Component
         $cek = ModelsPerubahanJabatan::where('id', $a)->first();
         $this->namaJabatan = $cek->jabatan->nama;
         $this->tingkatPekerjaan = $cek->tingkat->nama;
+        $this->tanggalUpdate = $cek->tgl_update_jabatan_baru;
 
         $this->idHapus = $a;
         $this->edit = true;
@@ -71,11 +72,17 @@ class PerubahanJabatan extends Component
             title: 'Good job!',
             text: 'You clicked the button!',
             icon: 'success',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $wire.kembali()
+            }
           })
         JS);
+    }
 
-        $this->reset();
-
+    public function kembali()
+    {
+        return redirect(route('perubahan-jabatan'));
     }
 
     public function store()
@@ -138,8 +145,11 @@ class PerubahanJabatan extends Component
                 $cek = ModelsPerubahanJabatan::where('user_id', $this->form['user_id'])->orderBy('created_at', 'desc')->first();
                 if ($cek) {
                     $this->form['nama_jabatan_lama'] = $cek->nama_jabatan_id;
+                    $this->namaJabatan = $cek->jabatan->nama;
                     $this->form['tingkat_pekerjaan_lama'] = $cek->tingkat_pekerjaan_id;
-                    $this->form['tgl_update_jabatan_lama'] = $cek->tgl_update_jabatan_baru;
+                    $this->tingkatPekerjaan = $cek->tingkat->nama;
+                    // $this->form['tgl_update_jabatan_lama'] = $cek->tgl_update_jabatan_baru;
+                    $this->tanggalUpdate = $cek->tgl_update_jabatan_baru;
                 } else {
                     $a = User::find($this->form['user_id']);
                     $this->form['nama_jabatan_lama'] = $a->nama_jabatan_id;

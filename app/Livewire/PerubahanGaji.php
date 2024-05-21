@@ -48,6 +48,8 @@ class PerubahanGaji extends Component
             $this->store();
         }
 
+        $this->reset();
+
         $this->js(<<<'JS'
         Swal.fire({
             title: 'Good job!',
@@ -56,7 +58,6 @@ class PerubahanGaji extends Component
           })
         JS);
 
-        $this->reset();
 
     }
 
@@ -114,8 +115,6 @@ class PerubahanGaji extends Component
                 'gapok_sekarang' => $this->form['gapok_baru']
             ]);
         }
-
-        $this->reset();
         $this->edit = false;
     }
 

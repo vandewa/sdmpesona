@@ -120,7 +120,6 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-
                                                                         </div>
 
                                                                         <div class="col-md-6">
@@ -176,8 +175,11 @@
                                                                                 <label for="inputEmail3"
                                                                                     class="col-sm-5 col-form-label">Tunjangan
                                                                                     KPI
-                                                                                    <small
-                                                                                        class="text-danger">*</small></label>
+                                                                                    <small class="text-danger">*</small>
+                                                                                    <button type="button"
+                                                                                        class="btn btn-info btn-sm"
+                                                                                        wire:click="$dispatch('show-modal-tunjangan-kpi')">Lihat
+                                                                                        Data</button></label></label>
                                                                                 <div class="col-sm-7">
                                                                                     <div class="input-group">
                                                                                         <div
@@ -200,7 +202,12 @@
                                                                                     class="col-sm-5 col-form-label">Tunjangan
                                                                                     Kehadiran
                                                                                     <small
-                                                                                        class="text-danger">*</small></label>
+                                                                                        class="text-danger">*</small>
+                                                                                    <button type="button"
+                                                                                        class="btn btn-info btn-sm"
+                                                                                        wire:click="$dispatch('show-modal-tunjangan-kehadiran')">Lihat
+                                                                                        Data</button></label>
+
                                                                                 <div class="col-sm-7">
                                                                                     <div class="input-group">
                                                                                         <div
@@ -418,4 +425,6 @@
             </div>
         </div>
     </section>
+    <livewire:component.modal-tunjangan-kehadiran wire:key='modal-tunjangan-kehadiran'>
+        <livewire:component.modal-tunjangan-kpi wire:key='modal-tunjangan-kpi'>
 </div>

@@ -80,6 +80,10 @@ class User extends Authenticatable implements LaratrustUser
     {
         return $this->belongsTo(TunjanganPendidikan::class, 'tunjangan_pendidikan_id');
     }
+    public function tunjanganMasaKerja()
+    {
+        return $this->belongsTo(TunjanganMasaKerja::class, 'tunjangan_masa_kerja_id');
+    }
 
     public function scopeCari($filter, $value)
     {

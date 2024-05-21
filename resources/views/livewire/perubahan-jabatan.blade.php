@@ -43,7 +43,7 @@
                                                                                             class="text-danger">*</small></label>
                                                                                     <div class="col-sm-8">
                                                                                         <select class="form-control"
-                                                                                            wire:model.live='form.nama_jabatan_lama'
+                                                                                            wire:model='form.nama_jabatan_lama'
                                                                                             @if ($edit) readonly @endif>
                                                                                             <option
                                                                                                 value="{{ $form['nama_jabatan_lama'] }}">
@@ -54,14 +54,14 @@
                                                                                 </div>
                                                                                 <div class="mb-2 row">
                                                                                     <label for="inputEmail3"
-                                                                                        class="col-sm-4 col-form-label">Tingkat
+                                                                                        class="col-sm-4 col-form-label">Status
                                                                                         Pekerjaan
                                                                                         Sebelumnya
                                                                                         <small
                                                                                             class="text-danger">*</small></label>
                                                                                     <div class="col-sm-8">
                                                                                         <select class="form-control"
-                                                                                            wire:model.live='form.tingkat_pekerjaan_lama'
+                                                                                            wire:model='form.tingkat_pekerjaan_lama'
                                                                                             @if ($edit) readonly @endif>
                                                                                             <option
                                                                                                 value="{{ $form['tingkat_pekerjaan_lama'] }}">
@@ -79,7 +79,7 @@
                                                                                     <div class="col-sm-8">
                                                                                         <input type="date"
                                                                                             class="form-control"
-                                                                                            wire:model='form.tgl_gaji_lama'
+                                                                                            wire:model='tanggalUpdate'
                                                                                             readonly>
                                                                                     </div>
                                                                                 </div>
@@ -138,7 +138,7 @@
                                                                             </div>
                                                                             <div class="mb-2 row">
                                                                                 <label for="inputEmail3"
-                                                                                    class="col-sm-4 col-form-label">Tingkat
+                                                                                    class="col-sm-4 col-form-label">Status
                                                                                     Pekerjaan
                                                                                     <small
                                                                                         class="text-danger">*</small></label>
@@ -146,7 +146,7 @@
                                                                                     <select class="form-control"
                                                                                         wire:model.live='form.tingkat_pekerjaan_id'>
                                                                                         <option value="">Pilih
-                                                                                            Tingkat Pekerjaan</option>
+                                                                                            Status Pekerjaan</option>
                                                                                         @foreach ($listTingkatPekerjaan ?? [] as $item)
                                                                                             <option
                                                                                                 value="{{ $item['id'] }}">

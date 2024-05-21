@@ -2,12 +2,12 @@
     <x-slot name="header">
         <div class="mb-2 row">
             <div class="col-sm-6">
-                <h1 class="m-0">Tingkat Pekerjaan</h1>
+                <h1 class="m-0">Status Pekerjaan</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item active">Master</li>
-                    <li class="breadcrumb-item"><a href="#">Tingkat Pekerjaan</a></li>
+                    <li class="breadcrumb-item"><a href="#">Status Pekerjaan</a></li>
                 </ol>
             </div>
         </div>
@@ -42,7 +42,7 @@
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         wire:model='form.nama'
-                                                                                        placeholder="Tingkat Pekerjaan">
+                                                                                        placeholder="Status Pekerjaan">
                                                                                     @error('form.nama')
                                                                                         <span
                                                                                             class="form-text text-danger">{{ $message }}</span>
@@ -62,7 +62,7 @@
                                                         <div class="card card-success card-outline">
                                                             <div class="card-header">
                                                                 <div class="card-title">
-                                                                    Tingkat Pekerjaan
+                                                                    Status Pekerjaan
                                                                 </div>
                                                             </div>
                                                             <div class="card-body">

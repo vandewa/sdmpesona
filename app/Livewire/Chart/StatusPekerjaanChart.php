@@ -3,6 +3,7 @@
 namespace App\Livewire\Chart;
 
 use App\Models\StatusPekerjaan;
+use App\Models\TingkatPekerjaan;
 use App\Models\User;
 use Livewire\Component;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
@@ -59,7 +60,7 @@ class StatusPekerjaanChart extends Component
     public function render()
     {
 
-        $jingan = StatusPekerjaan::withCount('pegawai')->get();
+        $jingan = TingkatPekerjaan::withCount('pegawai')->get();
 
         // dd($jingan);
 

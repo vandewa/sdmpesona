@@ -88,16 +88,17 @@
                                   </p>
                               </a>
                           </li> --}}
-                          <li class="nav-item">
-                              <a href="{{ route('lihat-gaji') }}"
-                                  class="nav-link  {{ Request::segment(1) == 'lihat-gaji' ? 'active' : '' }}">
-                                  <i class="nav-icon fas fa-hand-holding-dollar"></i>
-                                  <p>
-                                      Gaji
-                                  </p>
-                              </a>
-                          </li>
                       @endif
+
+                      <li class="nav-item">
+                          <a href="{{ route('lihat-gaji') }}"
+                              class="nav-link  {{ Request::segment(1) == 'lihat-gaji' ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-circle-dollar-to-slot"></i>
+                              <p>
+                                  Gaji
+                              </p>
+                          </a>
+                      </li>
 
                       @if (auth()->user()->hasRole(['superadmin', 'direktur']))
                           {{-- <li class="nav-item">
@@ -119,7 +120,7 @@
                                   class="nav-link  {{ Request::segment(1) == 'gaji-index' ? 'active' : '' }}{{ Request::segment(1) == 'gaji' ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-hand-holding-dollar"></i>
                                   <p>
-                                      Gaji
+                                      Penggajian
                                   </p>
                               </a>
                           </li>
@@ -252,7 +253,7 @@
                                           <p>Nama Jabatan</p>
                                       </a>
                                   </li>
-                                  <li class="nav-item">
+                                  {{-- <li class="nav-item">
                                       <a href="{{ route('master.status-pekerjaan') }}"
                                           class="nav-link 
                                       {{ Request::segment(2) == 'status-pekerjaan' ? 'active' : '' }}
@@ -264,7 +265,7 @@
                                           @endif
                                           <p>Status Pekerjaan</p>
                                       </a>
-                                  </li>
+                                  </li> --}}
                                   <li class="nav-item">
                                       <a href="{{ route('master.tingkat-pekerjaan') }}"
                                           class="nav-link 
@@ -275,7 +276,7 @@
                                           @else
                                               <i class="far fa-circle nav-icon ml-2"></i>
                                           @endif
-                                          <p>Tingkat Pekerjaan</p>
+                                          <p>Status Pekerjaan</p>
                                       </a>
                                   </li>
                                   <li class="nav-item">

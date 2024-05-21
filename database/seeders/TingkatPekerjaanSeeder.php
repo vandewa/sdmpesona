@@ -26,11 +26,11 @@ class TingkatPekerjaanSeeder extends Seeder
             ],
             [
                 'id' => '3',
-                'nama' => 'Karyawan Pelaksana Divisi',
+                'nama' => 'Pelaksana Divisi',
             ],
             [
                 'id' => '4',
-                'nama' => 'Karyawan Parttimer',
+                'nama' => 'Parttimer',
             ],
         ];
 
