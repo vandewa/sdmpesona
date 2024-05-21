@@ -425,6 +425,42 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row mb-2">
+                                                                                <div class="col-md-12">
+                                                                                    <center>
+                                                                                        <h5>Masa Kerja
+                                                                                            <b>{{ $masaKerja ?? '' }}</b>
+                                                                                            Tahun
+                                                                                        </h5>
+                                                                                    </center>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="row mb-2">
+                                                                                <label for="inputEmail3"
+                                                                                    class="col-sm-4 col-form-label">Masa
+                                                                                    Kerja
+                                                                                    <small
+                                                                                        class="text-danger">*</small>
+                                                                                </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <select class="form-control"
+                                                                                        wire:model='form.tunjangan_masa_kerja_id'>
+                                                                                        <option value="">Pilih
+                                                                                            Masa Kerja</option>
+                                                                                        @foreach ($listMasaKerja ?? [] as $item)
+                                                                                            <option
+                                                                                                value="{{ $item['id'] }}">
+                                                                                                {{ $item['nama'] }}
+                                                                                            </option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                    @error('form.tunjangan_masa_kerja_id')
+                                                                                        <span
+                                                                                            class="form-text text-danger">{{ $message }}</span>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row mb-2">
                                                                                 <label for="inputEmail3"
                                                                                     class="col-sm-4 col-form-label">Tanggal
                                                                                     Keluar
@@ -488,7 +524,7 @@
 
                                                                         @if ($edit)
                                                                             <div class="col-md-6">
-                                                                                <div class="row mb-2">
+                                                                                <div class="row mb-1">
                                                                                     <label for="inputEmail3"
                                                                                         class="col-sm-4 col-form-label">Nama
                                                                                         Jabatan Sekarang
@@ -515,7 +551,7 @@
                                                                                         @enderror
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="row mb-2">
+                                                                                <div class="row mb-1">
                                                                                     <label for="inputEmail3"
                                                                                         class="col-sm-4 col-form-label">Tingkat
                                                                                         Pekerjaan Sekarang
@@ -542,7 +578,7 @@
                                                                                         @enderror
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="row mb-2">
+                                                                                <div class="row mb-1">
                                                                                     <label for="inputEmail3"
                                                                                         class="col-sm-4 col-form-label">Gaji
                                                                                         Pokok Saat Ini
@@ -564,7 +600,7 @@
                                                                             </div>
                                                                         @endif
                                                                         <div class="col-md-6">
-                                                                            <div class="row mb-3">
+                                                                            <div class="row mb-2">
                                                                                 <label for="inputEmail3"
                                                                                     class="col-sm-4 col-form-label">Role</label>
                                                                                 <div class="col-sm-8">
@@ -585,7 +621,7 @@
                                                                                     @enderror
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row mb-3">
+                                                                            <div class="row mb-2">
                                                                                 <label for="inputEmail3"
                                                                                     class="col-sm-4 col-form-label">Status
                                                                                     User</label>

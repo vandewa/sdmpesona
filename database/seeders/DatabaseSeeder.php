@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call(TingkatPekerjaanSeeder::class);
         $this->call(TunjanganPendidikanSeeder::class);
         $this->call(CutiAlasanPentingSeeder::class);
+        $this->call(TunjanganMasaKerjaSeeder::class);
+        $this->call(TunjanganKehadiranSeeder::class);
+        $this->call(TunjanganKpiPelaksanaDivisiSeeder::class);
+        $this->call(TunjanganKpiPartimerSeeder::class);
     }
 }

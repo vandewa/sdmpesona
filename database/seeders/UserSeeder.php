@@ -40,7 +40,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_01",
                 "anak" => "-",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Amalia Fajarsari S.IKom",
@@ -65,7 +67,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_01",
                 "anak" => "-",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Pelangi Karismakristi S.IKom",
@@ -90,7 +94,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_01",
                 "anak" => "1",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Desta Ariyani Astuti S.Sos",
@@ -115,7 +121,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_02",
                 "anak" => "-",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Eka Saputri S.M",
@@ -140,7 +148,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_01",
                 "anak" => "1",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Faza Luthfia S.Pd",
@@ -165,7 +175,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_01",
                 "anak" => "1",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Tito Suseno",
@@ -190,7 +202,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_01",
                 "anak" => "1",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Nur Khasanah",
@@ -215,7 +229,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_01",
                 "anak" => "2",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Andhika Dede Sundawa",
@@ -240,7 +256,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_02",
                 "anak" => "-",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Ikbal Santosa",
@@ -265,7 +283,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_02",
                 "anak" => "-",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Mita Rosana S.Kom.I",
@@ -290,7 +310,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_03",
                 "anak" => "1",
                 "bank" => "BRI",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Tunjang Ari Suseno S.Ars",
@@ -315,7 +337,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_01",
                 "anak" => "1",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Bukhori",
@@ -340,7 +364,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_01",
                 "anak" => "2",
                 "bank" => "BRI",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Pramono",
@@ -365,7 +391,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_01",
                 "anak" => "2",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Urip Yulianto",
@@ -390,7 +418,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_01",
                 "anak" => "1",
                 "bank" => "Bank jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Nur Nofika Sari",
@@ -415,7 +445,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_02",
                 "anak" => "-",
                 "bank" => "BRI",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Miswanto S.IP",
@@ -440,7 +472,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_01",
                 "anak" => "2",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ],
             [
                 "name" => "Wening Tyas Suminar, S.Pd",
@@ -465,7 +499,9 @@ class UserSeeder extends Seeder
                 "kawin_tp" => "KAWIN_TP_03",
                 "anak" => "1",
                 "bank" => "Bank Jateng",
-                "password" => bcrypt('password')
+                "password" => bcrypt('password'),
+                "tgl_penetapan_gapok_awal" => "2023-03-30",
+                "tgl_penetapan_jabatan_awal" => "2023-03-30"
             ]
         ];
 

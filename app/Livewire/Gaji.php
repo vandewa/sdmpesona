@@ -36,6 +36,7 @@ class Gaji extends Component
         'tanggal_penggajian' => null,
         'jml_diterima_gapok' => null,
         'jml_diterima_tunjangan' => null,
+        'total_gaji' => null,
     ];
 
     public function mount($id = '')
@@ -51,7 +52,7 @@ class Gaji extends Component
 
         $this->form['tunjangan_pendidikan'] = $user->tunjanganPendidikan->nominal ?? "0";
 
-        $this->form['jml_diterima_gapok'] = $this->form['gapok'] + $this->form['honor_siaran'];
+        $this->form['jml_diterima_gapok'] = $this->form['gapok'];
 
         $this->form['jml_diterima_tunjangan'] =
             $this->form['tunjangan_pendidikan'] +
@@ -62,6 +63,9 @@ class Gaji extends Component
             $this->form['uang_makan_parttimer'] +
             $this->form['lain_lain'] +
             $this->form['fee'];
+
+        $this->form['total_gaji'] = $this->form['gapok'] + $this->form['jml_diterima_tunjangan'];
+
 
     }
 
@@ -161,10 +165,6 @@ class Gaji extends Component
     {
         // $property: The name of the current property that was updated
 
-        if ($property === 'form.honor_siaran') {
-            $this->form['jml_diterima_gapok'] = (int) $this->form['gapok'] + (int) $this->form['honor_siaran'];
-        }
-
         if ($property === 'form.tunjangan_pendidikan' || $property === 'form.tunjangan_masa_kerja' || $property === 'form.kpi' || $property === 'form.kehadiran' || $property === 'form.lembur' || $property === 'form.uang_makan_parttimer' || $property === 'form.lain_lain' || $property === 'form.fee') {
 
             $this->form['jml_diterima_tunjangan'] =
@@ -176,6 +176,8 @@ class Gaji extends Component
                 (int) $this->form['uang_makan_parttimer'] +
                 (int) $this->form['lain_lain'] +
                 (int) $this->form['fee'];
+
+            $this->form['total_gaji'] = $this->form['gapok'] + $this->form['jml_diterima_tunjangan'];
         }
 
     }

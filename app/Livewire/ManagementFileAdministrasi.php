@@ -1,21 +1,27 @@
 <?php
 
-namespace App\Livewire\Master;
+namespace App\Livewire;
 
-use App\Models\TunjanganPendidikan as ModelsTunjanganPendidikan;
+use App\Models\FileAdministrasi;
 use Livewire\Component;
+use App\Models\Kategori;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use Livewire\Attributes\Validate;
 
-class TunjanganPendidikan extends Component
+class ManagementFileAdministrasi extends Component
 {
 
     use WithPagination;
+    use WithFileUploads;
 
-    public $idHapus, $edit = false, $idnya, $cari;
+    public $idHapus, $edit = false, $idnya, $cari, $files;
 
     public $form = [
         'nama' => null,
-        'nominal' => null,
+        'tahun' => null,
+        'kategori_id' => null,
+        'path' => null,
     ];
 
     public function mount()
@@ -23,9 +29,14 @@ class TunjanganPendidikan extends Component
         //
     }
 
+    public function ambilKategori()
+    {
+        return Kategori::all();
+    }
+
     public function getEdit($a)
     {
-        $this->form = ModelsTunjanganPendidikan::find($a)->only(['nama', 'nominal']);
+        $this->form = FileAdministrasi::find($a)->only(['nama', 'tahun', 'kategori_id', 'path']);
         $this->idHapus = $a;
         $this->edit = true;
     }
@@ -38,7 +49,14 @@ class TunjanganPendidikan extends Component
             $this->store();
         }
 
-        $this->reset();
+        $this->form = [
+            'nama' => null,
+            'tahun' => null,
+            'kategori_id' => null,
+            'path' => null,
+        ];
+
+        $this->files = null;
 
         $this->js(<<<'JS'
         Swal.fire({
@@ -51,7 +69,11 @@ class TunjanganPendidikan extends Component
 
     public function store()
     {
-        ModelsTunjanganPendidikan::create($this->form);
+        if ($this->files) {
+            $foto = $this->files->store('sdmpesona/file', 'gcs');
+            $this->form['path'] = $foto;
+        }
+        FileAdministrasi::create($this->form);
     }
 
     public function delete($id)
@@ -77,7 +99,7 @@ class TunjanganPendidikan extends Component
 
     public function hapus()
     {
-        ModelsTunjanganPendidikan::destroy($this->idHapus);
+        FileAdministrasi::destroy($this->idHapus);
         $this->js(<<<'JS'
         Swal.fire({
             title: 'Good job!',
@@ -89,7 +111,11 @@ class TunjanganPendidikan extends Component
 
     public function storeUpdate()
     {
-        ModelsTunjanganPendidikan::find($this->idHapus)->update($this->form);
+        if ($this->files) {
+            $foto = $this->files->store('sdmpesona/file', 'gcs');
+            $this->form['path'] = $foto;
+        }
+        FileAdministrasi::find($this->idHapus)->update($this->form);
         $this->edit = false;
     }
 
@@ -102,11 +128,18 @@ class TunjanganPendidikan extends Component
 
     public function render()
     {
-        $data = ModelsTunjanganPendidikan::cari($this->cari)->paginate(20);
+        $data = FileAdministrasi::cari($this->cari);
 
+        //filter berdasarkan jenis pengumpulan
+        if ($this->idnya) {
+            $data->where('kategori_id', $this->idnya);
+        }
 
-        return view('livewire.master.tunjangan-pendidikan', [
+        $data = $data->orderBy('created_at', 'desc')->paginate(20);
+
+        return view('livewire.management-file-administrasi', [
             'post' => $data,
+            'kategori' => $this->ambilKategori()
         ]);
     }
 }

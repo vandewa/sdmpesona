@@ -53,29 +53,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row mb-2">
-                                                                                <label for="inputEmail3"
-                                                                                    class="col-sm-4 col-form-label">Honor
-                                                                                    <small
-                                                                                        class="text-danger">*</small></label>
-                                                                                <div class="col-sm-8">
-                                                                                    <div class="input-group">
-                                                                                        <div
-                                                                                            class="input-group-prepend">
-                                                                                            <span
-                                                                                                class="input-group-text">Rp.</span>
-                                                                                        </div>
-                                                                                        <input type="number"
-                                                                                            class="form-control"
-                                                                                            wire:model.change='form.honor_siaran'>
-                                                                                        @error('form.honor_siaran')
-                                                                                            <span
-                                                                                                class="form-text text-danger">{{ $message }}</span>
-                                                                                        @enderror
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row mb-2">
+                                                                            {{-- <div class="row mb-4">
                                                                                 <label for="inputEmail3"
                                                                                     class="col-sm-4 col-form-label">Jumlah
                                                                                     Diterima
@@ -98,8 +76,8 @@
                                                                                         @enderror
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="mb-2 row">
+                                                                            </div> --}}
+                                                                            <div class="mb-4 row">
                                                                                 <label for="inputEmail3"
                                                                                     class="col-sm-4 col-form-label">Tanggal
                                                                                     Penggajian
@@ -115,10 +93,38 @@
                                                                                     @enderror
                                                                                 </div>
                                                                             </div>
+                                                                            <hr>
+                                                                            <div class="row mb-2">
+                                                                                <label for="inputEmail3"
+                                                                                    class="col-sm-4 col-form-label">Total
+                                                                                    Gaji <br> (Gaji Pokok & Tunjangan
+                                                                                    dan
+                                                                                    Honor)
+                                                                                    <small
+                                                                                        class="text-danger">*</small></label>
+                                                                                <div class="col-sm-8">
+                                                                                    <div class="input-group">
+                                                                                        <div
+                                                                                            class="input-group-prepend">
+                                                                                            <span
+                                                                                                class="input-group-text">Rp.</span>
+                                                                                        </div>
+                                                                                        <input type="number"
+                                                                                            class="form-control"
+                                                                                            wire:model.change='form.total_gaji'
+                                                                                            readonly>
+                                                                                        @error('form.total_gaji')
+                                                                                            <span
+                                                                                                class="form-text text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
                                                                         </div>
 
                                                                         <div class="col-md-6">
-                                                                            <legend>Tunjangan</legend>
+                                                                            <legend>Tunjangan dan Honor</legend>
                                                                             <hr>
                                                                             <div class="mb-2 row">
                                                                                 <label for="inputEmail3"
@@ -168,7 +174,8 @@
                                                                             </div>
                                                                             <div class="row mb-2">
                                                                                 <label for="inputEmail3"
-                                                                                    class="col-sm-5 col-form-label">KPI
+                                                                                    class="col-sm-5 col-form-label">Tunjangan
+                                                                                    KPI
                                                                                     <small
                                                                                         class="text-danger">*</small></label>
                                                                                 <div class="col-sm-7">
@@ -190,7 +197,8 @@
                                                                             </div>
                                                                             <div class="row mb-2">
                                                                                 <label for="inputEmail3"
-                                                                                    class="col-sm-5 col-form-label">Kehadiran
+                                                                                    class="col-sm-5 col-form-label">Tunjangan
+                                                                                    Kehadiran
                                                                                     <small
                                                                                         class="text-danger">*</small></label>
                                                                                 <div class="col-sm-7">
@@ -302,7 +310,6 @@
                                                                             <div class="row mb-2">
                                                                                 <label for="inputEmail3"
                                                                                     class="col-sm-5 col-form-label">Jumlah
-                                                                                    Diterima
                                                                                     <small
                                                                                         class="text-danger">*</small></label>
                                                                                 <div class="col-sm-7">

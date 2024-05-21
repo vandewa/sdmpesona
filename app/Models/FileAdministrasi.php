@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TunjanganPendidikan extends Model
+class FileAdministrasi extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function pegawai()
+    public function kategori()
     {
-        return $this->hasMany(User::class, 'tunjangan_pendidikan_id');
+        return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 
     public function scopeCari($filter, $value)
@@ -22,5 +22,4 @@ class TunjanganPendidikan extends Model
             return $this->where('nama', 'like', "%$value%");
         }
     }
-
 }

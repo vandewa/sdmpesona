@@ -37,6 +37,8 @@ class StatusPekerjaan extends Component
             $this->store();
         }
 
+        $this->reset();
+
         $this->js(<<<'JS'
         Swal.fire({
             title: 'Good job!',
@@ -87,7 +89,6 @@ class StatusPekerjaan extends Component
     public function storeUpdate()
     {
         ModelsStatusPekerjaan::find($this->idHapus)->update($this->form);
-        $this->reset();
         $this->edit = false;
     }
 

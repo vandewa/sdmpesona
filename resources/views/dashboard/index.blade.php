@@ -67,11 +67,14 @@
                 </div>
                 <!-- /.row -->
                 <div class="row mt-4">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <livewire:chart.status-pekerjaan-chart>
                     </div>
-                    <div class="col-md-6">
-                        <livewire:chart.tingkat-pekerjaan-chart>
+                    <div class="col-md-4">
+                        <livewire:chart.masa-kerja-chart>
+                    </div>
+                    <div class="col-md-4">
+                        <livewire:chart.pendidikan-chart>
                     </div>
                 </div>
 

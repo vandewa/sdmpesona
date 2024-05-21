@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Carbon\Carbon;
 use App\Models\Role;
 use App\Models\ComCode;
 use Livewire\Component;
@@ -9,13 +10,14 @@ use App\Models\NamaJabatan;
 use Illuminate\Support\Arr;
 use App\Models\StatusPekerjaan;
 use App\Models\TingkatPekerjaan;
+use App\Models\TunjanganMasaKerja;
 use App\Models\User as ModelsUser;
 use App\Models\TunjanganPendidikan;
 
 class User extends Component
 {
 
-    public $role, $listRole, $konfirmasi_password, $idHapus, $edit = false, $user, $listStatusPekerjaan, $listNamaJabatan, $listTingkatPekerjaanAwal, $listKawin, $listPendidikan;
+    public $role, $listRole, $konfirmasi_password, $idHapus, $edit = false, $user, $listStatusPekerjaan, $listNamaJabatan, $listTingkatPekerjaanAwal, $listKawin, $listPendidikan, $listMasaKerja, $masaKerja;
 
     public $form = [
         'name' => null,
@@ -45,6 +47,7 @@ class User extends Component
         'email' => null,
         'password' => null,
         'tunjangan_pendidikan_id' => null,
+        'tunjangan_masa_kerja_id' => null,
     ];
 
 
@@ -59,7 +62,9 @@ class User extends Component
             $this->role = $data->roles()->first()->id ?? null;
             $this->edit = true;
             $this->user = $id;
-
+            if ($this->form['tgl_masuk']) {
+                $this->masaKerja = Carbon::now()->diffInYears($this->form['tgl_masuk']);
+            }
 
         }
         $this->listRole = $this->ambilRole();
@@ -68,6 +73,7 @@ class User extends Component
         $this->listTingkatPekerjaanAwal = $this->ambilTingkatPekerjaanAwal();
         $this->listKawin = $this->ambilKawin();
         $this->listPendidikan = $this->ambilTunjanganPendidikan();
+        $this->listMasaKerja = $this->ambilTunjanganMasaKerja();
 
     }
 
@@ -99,6 +105,10 @@ class User extends Component
     public function ambilTunjanganPendidikan()
     {
         return TunjanganPendidikan::all()->toArray();
+    }
+    public function ambilTunjanganMasaKerja()
+    {
+        return TunjanganMasaKerja::all()->toArray();
     }
 
 
@@ -135,6 +145,8 @@ class User extends Component
             'form.tgl_penetapan_jabatan_awal' => 'required',
             'form.tgl_penetapan_gapok_awal' => 'required',
             'form.tunjangan_pendidikan_id' => 'required',
+            'form.tgl_masuk' => 'required',
+            'form.tunjangan_masa_kerja_id' => 'required',
         ]);
 
         $this->form['password'] = bcrypt($this->form['password']);
@@ -152,6 +164,9 @@ class User extends Component
             'form.tgl_penetapan_jabatan_awal' => 'required',
             'form.tgl_penetapan_gapok_awal' => 'required',
             'form.tunjangan_pendidikan_id' => 'required',
+            'form.tgl_masuk' => 'required',
+            'form.tunjangan_masa_kerja_id' => 'required',
+
         ]);
 
         if ($this->form['password'] ?? "") {

@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Master;
 
-use App\Models\TunjanganPendidikan as ModelsTunjanganPendidikan;
+use App\Models\TunjanganMasaKerja as ModelsTunjanganMasaKerja;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class TunjanganPendidikan extends Component
+class TunjanganMasaKerja extends Component
 {
 
     use WithPagination;
@@ -25,7 +25,7 @@ class TunjanganPendidikan extends Component
 
     public function getEdit($a)
     {
-        $this->form = ModelsTunjanganPendidikan::find($a)->only(['nama', 'nominal']);
+        $this->form = ModelsTunjanganMasaKerja::find($a)->only(['nama', 'nominal']);
         $this->idHapus = $a;
         $this->edit = true;
     }
@@ -51,7 +51,7 @@ class TunjanganPendidikan extends Component
 
     public function store()
     {
-        ModelsTunjanganPendidikan::create($this->form);
+        ModelsTunjanganMasaKerja::create($this->form);
     }
 
     public function delete($id)
@@ -77,7 +77,7 @@ class TunjanganPendidikan extends Component
 
     public function hapus()
     {
-        ModelsTunjanganPendidikan::destroy($this->idHapus);
+        ModelsTunjanganMasaKerja::destroy($this->idHapus);
         $this->js(<<<'JS'
         Swal.fire({
             title: 'Good job!',
@@ -89,7 +89,7 @@ class TunjanganPendidikan extends Component
 
     public function storeUpdate()
     {
-        ModelsTunjanganPendidikan::find($this->idHapus)->update($this->form);
+        ModelsTunjanganMasaKerja::find($this->idHapus)->update($this->form);
         $this->edit = false;
     }
 
@@ -102,10 +102,10 @@ class TunjanganPendidikan extends Component
 
     public function render()
     {
-        $data = ModelsTunjanganPendidikan::cari($this->cari)->paginate(20);
+        $data = ModelsTunjanganMasaKerja::cari($this->cari)->paginate(20);
 
 
-        return view('livewire.master.tunjangan-pendidikan', [
+        return view('livewire.master.tunjangan-masa-kerja', [
             'post' => $data,
         ]);
     }

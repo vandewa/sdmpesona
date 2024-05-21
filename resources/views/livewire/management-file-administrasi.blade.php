@@ -2,12 +2,12 @@
     <x-slot name="header">
         <div class="mb-2 row">
             <div class="col-sm-6">
-                <h1 class="m-0">Keuangan</h1>
+                <h1 class="m-0">Administrasi</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item active">Management File</li>
-                    <li class="breadcrumb-item"><a href="#">Keuangan</a></li>
+                    <li class="breadcrumb-item"><a href="#">Administrasi</a></li>
                 </ol>
             </div>
         </div>
@@ -135,7 +135,7 @@
                                                         <div class="card card-success card-outline">
                                                             <div class="card-header">
                                                                 <div class="card-title">
-                                                                    Keuangan
+                                                                    Administrasi
                                                                 </div>
                                                                 <div class="card-tools">
                                                                     <select name="" class="form-control"

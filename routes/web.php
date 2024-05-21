@@ -2,7 +2,9 @@
 
 use App\Livewire\LihatGaji;
 use App\Livewire\ManagementFile;
+use App\Livewire\ManagementFileAdministrasi;
 use App\Livewire\Master\Kategori;
+use App\Livewire\Master\TunjanganKpiPartimer;
 use App\Livewire\PengajuanCuti;
 use App\Livewire\User;
 use App\Livewire\Kegiatan;
@@ -29,6 +31,9 @@ use App\Livewire\Master\CutiAlasanPenting;
 use App\Livewire\Master\NamaJabatan;
 use App\Livewire\Master\StatusPekerjaan;
 use App\Livewire\Master\TingkatPekerjaan;
+use App\Livewire\Master\TunjanganKehadiran;
+use App\Livewire\Master\TunjanganKpiPelaksanaDivisi;
+use App\Livewire\Master\TunjanganMasaKerja;
 use App\Livewire\Master\TunjanganPendidikan;
 use App\Livewire\PerubahanGaji;
 use App\Livewire\PerubahanJabatan;
@@ -87,6 +92,10 @@ Route::middleware([
         Route::get('kategori', Kategori::class)->name('kategori');
         Route::get('cuti-alasan-penting', CutiAlasanPenting::class)->name('cuti-alasan-penting');
         Route::get('tunjangan-pendidikan', TunjanganPendidikan::class)->name('tunjangan-pendidikan');
+        Route::get('tunjangan-masa-kerja', TunjanganMasaKerja::class)->name('tunjangan-masa-kerja');
+        Route::get('tunjangan-kehadiran', TunjanganKehadiran::class)->name('tunjangan-kehadiran');
+        Route::get('tunjangan-kpi-pelaksana-divisi', TunjanganKpiPelaksanaDivisi::class)->name('tunjangan-kpi-pelaksana-divisi');
+        Route::get('tunjangan-kpi-partimer', TunjanganKpiPartimer::class)->name('tunjangan-kpi-partimer');
 
     });
 
@@ -100,6 +109,7 @@ Route::middleware([
     Route::get('perubahan-gaji', PerubahanGaji::class)->name('perubahan-gaji');
     Route::get('perubahan-jabatan', PerubahanJabatan::class)->name('perubahan-jabatan');
     Route::get('file', ManagementFile::class)->name('file');
+    Route::get('file-administrasi', ManagementFileAdministrasi::class)->name('file-administrasi');
     Route::get('gaji-index', GajiIndex::class)->name('gaji-index');
     Route::get('gaji/{id?}', Gaji::class)->name('gaji');
     Route::get('profil', Profil::class)->name('profil');

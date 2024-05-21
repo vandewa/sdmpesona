@@ -37,6 +37,9 @@ class NamaJabatan extends Component
             $this->store();
         }
 
+        $this->reset();
+
+
         $this->js(<<<'JS'
         Swal.fire({
             title: 'Good job!',
@@ -87,7 +90,6 @@ class NamaJabatan extends Component
     public function storeUpdate()
     {
         ModelsNamaJabatan::find($this->idHapus)->update($this->form);
-        $this->reset();
         $this->edit = false;
     }
 

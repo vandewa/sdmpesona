@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TunjanganPendidikan extends Model
+class TunjanganKpiPartimer extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
-
-    public function pegawai()
-    {
-        return $this->hasMany(User::class, 'tunjangan_pendidikan_id');
-    }
 
     public function scopeCari($filter, $value)
     {
@@ -22,5 +17,4 @@ class TunjanganPendidikan extends Model
             return $this->where('nama', 'like', "%$value%");
         }
     }
-
 }

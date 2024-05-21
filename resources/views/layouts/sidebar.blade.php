@@ -79,7 +79,7 @@
                               </a>
                           </li>
 
-                          <li class="nav-item">
+                          {{-- <li class="nav-item">
                               <a href="{{ route('pengajuan-cuti') }}"
                                   class="nav-link  {{ Request::segment(1) == 'pengajuan-cuti' ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-address-book"></i>
@@ -87,7 +87,7 @@
                                       Pengajuan Cuti
                                   </p>
                               </a>
-                          </li>
+                          </li> --}}
                           <li class="nav-item">
                               <a href="{{ route('lihat-gaji') }}"
                                   class="nav-link  {{ Request::segment(1) == 'lihat-gaji' ? 'active' : '' }}">
@@ -100,7 +100,7 @@
                       @endif
 
                       @if (auth()->user()->hasRole(['superadmin', 'direktur']))
-                          <li class="nav-item">
+                          {{-- <li class="nav-item">
                               <a href="{{ route('cuti') }}"
                                   class="nav-link  {{ Request::segment(1) == 'cuti' ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-address-book"></i>
@@ -113,7 +113,7 @@
                                       <span class="badge badge-danger ml-2">{{ cekCuti() }}</span>
                                   @endif
                               </a>
-                          </li>
+                          </li> --}}
                           <li class="nav-item">
                               <a href="{{ route('gaji-index') }}"
                                   class="nav-link  {{ Request::segment(1) == 'gaji-index' ? 'active' : '' }}{{ Request::segment(1) == 'gaji' ? 'active' : '' }}">
@@ -141,14 +141,50 @@
                                   </p>
                               </a>
                           </li>
-                          <li class="nav-item">
-                              <a href="{{ route('file') }}"
-                                  class="nav-link  {{ Request::segment(1) == 'file' ? 'active' : '' }}">
-                                  <i class="nav-icon fas fa-file-upload"></i>
+                          <li
+                              class="nav-item
+                                {{ Request::segment(1) == 'file' ? 'menu-is-opening menu-open' : '' }}
+                                {{ Request::segment(1) == 'file-administrasi' ? 'menu-is-opening menu-open' : '' }}
+                              ">
+                              <a href="#"
+                                  class="nav-link
+                                  {{ Request::segment(1) == 'file' ? 'active' : '' }}
+                                  {{ Request::segment(1) == 'file-administrasi' ? 'active' : '' }}
+                                  ">
+                                  <i class="nav-icon fa-solid fa-file-lines"></i>
                                   <p>
                                       Management File
+                                      <i class="fas fa-angle-left right"></i>
                                   </p>
                               </a>
+                              <ul class="nav nav-treeview">
+                                  <li class="nav-item">
+                                      <a href="{{ route('file') }}"
+                                          class="nav-link 
+                                      {{ Request::segment(1) == 'file' ? 'active' : '' }}
+                                      ">
+                                          @if (Request::segment(1) == 'file')
+                                              <i class="far fa-dot-circle nav-icon ml-2"></i>
+                                          @else
+                                              <i class="far fa-circle nav-icon ml-2"></i>
+                                          @endif
+                                          <p>Keuangan</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('file-administrasi') }}"
+                                          class="nav-link 
+                                      {{ Request::segment(1) == 'file-administrasi' ? 'active' : '' }}
+                                      ">
+                                          @if (Request::segment(1) == 'file-administrasi')
+                                              <i class="far fa-dot-circle nav-icon ml-2"></i>
+                                          @else
+                                              <i class="far fa-circle nav-icon ml-2"></i>
+                                          @endif
+                                          <p>Administrasi</p>
+                                      </a>
+                                  </li>
+                              </ul>
                           </li>
                           <li
                               class="nav-item
@@ -159,6 +195,10 @@
                                 {{ Request::segment(2) == 'tingkat-pekerjaan' ? 'menu-is-opening menu-open' : '' }}
                                 {{ Request::segment(2) == 'kategori' ? 'menu-is-opening menu-open' : '' }}
                                 {{ Request::segment(2) == 'tunjangan-pendidikan' ? 'menu-is-opening menu-open' : '' }}
+                                {{ Request::segment(2) == 'tunjangan-masa-kerja' ? 'menu-is-opening menu-open' : '' }}
+                                {{ Request::segment(2) == 'tunjangan-kehadiran' ? 'menu-is-opening menu-open' : '' }}
+                                {{ Request::segment(2) == 'tunjangan-kpi-pelaksana-divisi' ? 'menu-is-opening menu-open' : '' }}
+                                {{ Request::segment(2) == 'tunjangan-kpi-partimer' ? 'menu-is-opening menu-open' : '' }}
                                 {{ Request::segment(2) == 'cuti-alasan-penting' ? 'menu-is-opening menu-open' : '' }}
                               ">
                               <a href="#"
@@ -170,9 +210,13 @@
                                   {{ Request::segment(2) == 'tingkat-pekerjaan' ? 'active' : '' }}
                                   {{ Request::segment(2) == 'kategori' ? 'active' : '' }}
                                   {{ Request::segment(2) == 'tunjangan-pendidikan' ? 'active' : '' }}
+                                  {{ Request::segment(2) == 'tunjangan-masa-kerja' ? 'active' : '' }}
+                                  {{ Request::segment(2) == 'tunjangan-kehadiran' ? 'active' : '' }}
+                                  {{ Request::segment(2) == 'tunjangan-kpi-pelaksana-divisi' ? 'active' : '' }}
+                                  {{ Request::segment(2) == 'tunjangan-kpi-partimer' ? 'active' : '' }}
                                   {{ Request::segment(2) == 'cuti-alasan-penting' ? 'active' : '' }}
                                   ">
-                                  <i class="nav-icon fa-solid fa-file-lines"></i>
+                                  <i class="nav-icon fa-solid fa-laptop"></i>
                                   <p>
                                       Master
                                       <i class="fas fa-angle-left right"></i>
@@ -248,6 +292,19 @@
                                       </a>
                                   </li>
                                   <li class="nav-item">
+                                      <a href="{{ route('master.cuti-alasan-penting') }}"
+                                          class="nav-link 
+                                    {{ Request::segment(2) == 'cuti-alasan-penting' ? 'active' : '' }}
+                                    ">
+                                          @if (Request::segment(2) == 'cuti-alasan-penting')
+                                              <i class="far fa-dot-circle nav-icon ml-2"></i>
+                                          @else
+                                              <i class="far fa-circle nav-icon ml-2"></i>
+                                          @endif
+                                          <p>Jenis Cuti Alasan Penting</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
                                       <a href="{{ route('master.tunjangan-pendidikan') }}"
                                           class="nav-link 
                                       {{ Request::segment(2) == 'tunjangan-pendidikan' ? 'active' : '' }}
@@ -261,18 +318,58 @@
                                       </a>
                                   </li>
                                   <li class="nav-item">
-                                      <a href="{{ route('master.cuti-alasan-penting') }}"
+                                      <a href="{{ route('master.tunjangan-masa-kerja') }}"
                                           class="nav-link 
-                                      {{ Request::segment(2) == 'cuti-alasan-penting' ? 'active' : '' }}
+                                      {{ Request::segment(2) == 'tunjangan-masa-kerja' ? 'active' : '' }}
                                       ">
-                                          @if (Request::segment(2) == 'cuti-alasan-penting')
+                                          @if (Request::segment(2) == 'tunjangan-masa-kerja')
                                               <i class="far fa-dot-circle nav-icon ml-2"></i>
                                           @else
                                               <i class="far fa-circle nav-icon ml-2"></i>
                                           @endif
-                                          <p>Jenis Cuti Alasan Penting</p>
+                                          <p>Tunjangan Masa Kerja</p>
                                       </a>
                                   </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.tunjangan-kehadiran') }}"
+                                          class="nav-link 
+                                      {{ Request::segment(2) == 'tunjangan-kehadiran' ? 'active' : '' }}
+                                      ">
+                                          @if (Request::segment(2) == 'tunjangan-kehadiran')
+                                              <i class="far fa-dot-circle nav-icon ml-2"></i>
+                                          @else
+                                              <i class="far fa-circle nav-icon ml-2"></i>
+                                          @endif
+                                          <p>Tunjangan Kehadiran</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.tunjangan-kpi-pelaksana-divisi') }}"
+                                          class="nav-link 
+                                      {{ Request::segment(2) == 'tunjangan-kpi-pelaksana-divisi' ? 'active' : '' }}
+                                      ">
+                                          @if (Request::segment(2) == 'tunjangan-kpi-pelaksana-divisi')
+                                              <i class="far fa-dot-circle nav-icon ml-2"></i>
+                                          @else
+                                              <i class="far fa-circle nav-icon ml-2"></i>
+                                          @endif
+                                          <p>Tunjangan KPI Pelaksana Divisi</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.tunjangan-kpi-partimer') }}"
+                                          class="nav-link 
+                                      {{ Request::segment(2) == 'tunjangan-kpi-partimer' ? 'active' : '' }}
+                                      ">
+                                          @if (Request::segment(2) == 'tunjangan-kpi-partimer')
+                                              <i class="far fa-dot-circle nav-icon ml-2"></i>
+                                          @else
+                                              <i class="far fa-circle nav-icon ml-2"></i>
+                                          @endif
+                                          <p>Tunjangan KPI Partimer</p>
+                                      </a>
+                                  </li>
+
                               </ul>
                           </li>
                       @endif
