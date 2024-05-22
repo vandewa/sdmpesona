@@ -63,7 +63,7 @@
                                                                                 <td>{{ $item->id_karyawan ?? '' }}</td>
                                                                                 <td>{{ $item->name ?? '' }}</td>
                                                                                 <td>{{ $item->jabatan->nama ?? '' }}
-                                                                                <td>{{ $item->statusnya->nama ?? '' }}
+                                                                                <td>{{ $item->tingkat->nama ?? '' }}
                                                                                 </td>
                                                                                 <td>{{ $item->roles()->first()->name ?? '-' }}
                                                                                 </td>

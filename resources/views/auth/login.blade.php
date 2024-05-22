@@ -9,7 +9,7 @@
     <meta name="description" content="Pesona FM">
     <meta name="author" content="BPBD>
     <meta name="keyword" content="Pesona FM">
-    <link rel="icon" href="{{ asset('snacked/ltr/assets/images/favicon/favicon-32x32.png') }}" type="image/png" />
+    <link rel="icon" href="{{ asset('favicon_io/favicon-32x32.png') }}" type="image/png" />
     <title>Login Pesona FM</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">

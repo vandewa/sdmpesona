@@ -22,25 +22,32 @@
                     <div class="card card-info card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('soul.png') }}"
-                                    alt="User profile picture">
+                                @if ($form['path_foto'])
+                                    <img class="profile-user-img img-fluid img-circle"
+                                        src="{{ route('helper.show-picture', ['path' => $form['path_foto']]) }}"
+                                        alt="User profile picture">
+                                @else
+                                    <img class="profile-user-img img-fluid img-circle" src="{{ asset('soul.png') }}"
+                                        alt="User profile picture">
+                                @endif
+
                             </div>
 
                             <h3 class="profile-username text-center">{{ $form['name'] ?? '-' }}</h3>
 
 
-                            <ul class="list-group list-group-unbordered mb-3 mt-5">
+                            <ul class="list-group list-group-unbordered mb-3 mt-3">
                                 <li class="list-group-item">
                                     <b>ID Karyawan</b> <br>
-                                    <span>{{ $form['id_karyawan'] ?? '-' }}</span>
+                                    <span>{{ $idKaryawan }}</span>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Jabatan</b> <br>
-                                    <span>{{ $form['jabatan']['nama'] ?? '' }}</span>
+                                    <span>{{ $jabatan }}</span>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Status</b> <br>
-                                    <span>{{ $form['statusnya']['nama'] ?? '' }}</span>
+                                    <span>{{ $status }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -57,13 +64,44 @@
                                     <form class="form-horizontal" wire:submit='save'>
                                         <legend>Data Diri</legend>
                                         <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <div x-data="{ uploading: false, progress: 0 }"
+                                                    x-on:livewire-upload-start="uploading = true"
+                                                    x-on:livewire-upload-finish="uploading = false"
+                                                    x-on:livewire-upload-cancel="uploading = false"
+                                                    x-on:livewire-upload-error="uploading = false"
+                                                    x-on:livewire-upload-progress="progress = $event.detail.progress">
+                                                    <div>
+                                                        @if ($photo)
+                                                            <img src="{{ $photo->temporaryUrl() }}"
+                                                                style="max-width: 200px;">
+                                                        @endif
+                                                    </div>
+
+                                                    <div>
+                                                        <span>Ganti Foto</span>
+                                                        <input type="file" wire:model='photo' class="form-control"
+                                                            accept="image/*">
+                                                        @error('photo')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                        <div x-show="uploading">
+                                                            <progress max="100"
+                                                                x-bind:value="progress"></progress>
+                                                            <span x-text="progress"><!-- Will output: "bar" -->
+                                                            </span> %
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                             <div class="col-md-6">
                                                 <div class="row mb-2">
                                                     <label for="inputName" class="col-sm-4 col-form-label">Nama</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control"
-                                                            wire:model.blur='form.name' placeholder="Nama Lengkap">
-                                                        @error('form.nama')
+                                                            wire:model='form.name' placeholder="Nama Lengkap">
+                                                        @error('form.name')
                                                             <span class="form-text text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
@@ -71,10 +109,9 @@
                                                 <div class="row mb-2">
                                                     <label for="inputName" class="col-sm-4 col-form-label">NIK</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control"
-                                                            wire:model.blur='form.nik'
+                                                        <input type="text" class="form-control" wire:model='form.ktp'
                                                             placeholder="Nomor Induk Kependudukan">
-                                                        @error('form.nik')
+                                                        @error('form.ktp')
                                                             <span class="form-text text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
@@ -83,7 +120,7 @@
                                                     <label for="inputName" class="col-sm-4 col-form-label">NPWP</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control"
-                                                            wire:model.blur='form.npwp' placeholder="Nomor NPWP">
+                                                            wire:model='form.npwp' placeholder="Nomor NPWP">
                                                         @error('form.npwp')
                                                             <span class="form-text text-danger">{{ $message }}</span>
                                                         @enderror

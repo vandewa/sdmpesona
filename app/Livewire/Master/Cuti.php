@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Master;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\ComCode;
 use Livewire\Component;
+use App\Jobs\kirimPesan;
 use Illuminate\Support\Arr;
 use Livewire\WithPagination;
 use App\Models\PersetujuanCuti;
@@ -93,7 +95,6 @@ class Cuti extends Component
 
     public function save()
     {
-
         $this->validate([
             'form.status_st' => 'required',
         ]);
@@ -104,11 +105,30 @@ class Cuti extends Component
             'status_st' => $this->persetujuanDirektur,
         ]);
 
+        //cek data pegawai / jenis cuti / tanggal
+        $pegawai = User::find($this->form['user_id']);
+        $jenisCuti = ComCode::where('com_cd', $this->form['cuti_tp'])->first();
+        if ($this->form['tgl_mulai'] == $this->form['tgl_selesai']) {
+            $tanggal = Carbon::createFromFormat('Y-m-d', $this->form['tgl_mulai'])->isoFormat('D MMMM Y');
+        } else {
+            $tanggal = Carbon::createFromFormat('Y-m-d', $this->form['tgl_mulai'])->isoFormat('D MMMM ') . ' - ' . Carbon::createFromFormat('Y-m-d', $this->form['tgl_selesai'])->isoFormat('D MMMM Y');
+        }
+
         //jika salah satu direktur menolak
         if ($this->persetujuanDirektur == 'STATUS_ST_03') {
             ModelsCuti::find($this->idHapus)->update([
                 'status_st' => $this->persetujuanDirektur
             ]);
+
+            $pesan = '*Notifikasi Pengajuan Cuti*' . urldecode('%0D%0A%0D%0A') .
+                'Nama : ' . $pegawai->name ?? '' . urldecode('%0D%0A') .
+                'Jenis Cuti : ' . $jenisCuti->code_nm . urldecode('%0D%0A') .
+                'Tanggal : ' . $tanggal . urldecode('%0D%0A%0D%0A') .
+                '*DITOLAK*';
+            ;
+
+            //kirim pesan ke pegawai
+            kirimPesan::dispatch($pegawai->telpon, $pesan);
         }
 
         //jika minimal 2 direktur setuju maka pengajuan cuti disetujui
@@ -117,6 +137,17 @@ class Cuti extends Component
             ModelsCuti::find($this->idHapus)->update([
                 'status_st' => 'STATUS_ST_02'
             ]);
+
+
+            $pesan = '*Notifikasi Pengajuan Cuti*' . urldecode('%0D%0A%0D%0A') .
+                'Nama : ' . $pegawai->name ?? '' . urldecode('%0D%0A') .
+                'Jenis Cuti : ' . $jenisCuti->code_nm . urldecode('%0D%0A') .
+                'Tanggal : ' . $tanggal . urldecode('%0D%0A%0D%0A') .
+                '*DISETUJUI*';
+            ;
+
+            //kirim pesan ke pegawai
+            kirimPesan::dispatch($pegawai->telpon, $pesan);
         }
 
         $this->reset();

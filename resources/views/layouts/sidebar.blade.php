@@ -45,7 +45,12 @@
               <!-- Sidebar user panel (optional) -->
               <div class="pb-3 mt-3 mb-3 user-panel d-flex">
                   <div class="image">
-                      <img src="{{ asset('soul.png') }}" class="img-circle elevation-2" alt="User Image">
+                      @if (auth()->user()->path_foto)
+                          <img src="{{ route('helper.show-picture', ['path' => auth()->user()->path_foto]) }}"
+                              class="img-circle elevation-2" alt="User Image">
+                      @else
+                          <img src="{{ asset('soul.png') }}" class="img-circle elevation-2" alt="User Image">
+                      @endif
                   </div>
                   <div class="info">
                       <a href="#" class="d-block">{{ auth()->user()->name }}</a>
@@ -68,27 +73,17 @@
                           </li>
                       @endif
 
-                      @if (!auth()->user()->hasRole(['superadmin', 'direktur']))
-                          <li class="nav-item">
-                              <a href="{{ route('profil') }}"
-                                  class="nav-link  {{ Request::segment(1) == 'profil' ? 'active' : '' }}">
-                                  <i class="nav-icon fas fa-user"></i>
-                                  <p>
-                                      Profil
-                                  </p>
-                              </a>
-                          </li>
-
-                          {{-- <li class="nav-item">
-                              <a href="{{ route('pengajuan-cuti') }}"
-                                  class="nav-link  {{ Request::segment(1) == 'pengajuan-cuti' ? 'active' : '' }}">
-                                  <i class="nav-icon fas fa-address-book"></i>
-                                  <p>
-                                      Pengajuan Cuti
-                                  </p>
-                              </a>
-                          </li> --}}
-                      @endif
+                      {{-- @if (!auth()->user()->hasRole(['superadmin', 'direktur', 'administrator'])) --}}
+                      <li class="nav-item">
+                          <a href="{{ route('profil') }}"
+                              class="nav-link  {{ Request::segment(1) == 'profil' ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-user"></i>
+                              <p>
+                                  Profil
+                              </p>
+                          </a>
+                      </li>
+                      {{-- @endif    --}}
 
                       <li class="nav-item">
                           <a href="{{ route('lihat-gaji') }}"
@@ -100,11 +95,21 @@
                           </a>
                       </li>
 
-                      @if (auth()->user()->hasRole(['superadmin', 'direktur']))
+                      {{-- <li class="nav-item">
+                          <a href="{{ route('pengajuan-cuti') }}"
+                              class="nav-link  {{ Request::segment(1) == 'pengajuan-cuti' ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-calendar"></i>
+                              <p>
+                                  Pengajuan Cuti
+                              </p>
+                          </a>
+                      </li> --}}
+
+                      @if (auth()->user()->hasRole(['superadmin', 'direktur', 'administrator']))
                           {{-- <li class="nav-item">
                               <a href="{{ route('cuti') }}"
                                   class="nav-link  {{ Request::segment(1) == 'cuti' ? 'active' : '' }}">
-                                  <i class="nav-icon fas fa-address-book"></i>
+                                  <i class="nav-icon fas fa-calendar-check"></i>
                                   <p>
                                       Cuti
                                   </p>

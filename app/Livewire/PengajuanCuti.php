@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Jobs\kirimPesan;
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\ComCode;
 use Livewire\Component;
 use Illuminate\Support\Arr;
@@ -39,6 +41,7 @@ class PengajuanCuti extends Component
         $this->listStatus = $this->ambilStatus();
         $this->form['tgl_mulai'] = date('Y-m-d');
         $this->form['tgl_selesai'] = date('Y-m-d');
+        $this->form['user_id'] = auth()->user()->id;
     }
 
     public function ambilJenisCuti()
@@ -79,7 +82,7 @@ class PengajuanCuti extends Component
             JS);
         }
 
-        $this->form['user_id'] = auth()->user()->id;
+
         $this->form['status_st'] = 'STATUS_ST_01';
 
         $this->validate([
@@ -104,6 +107,29 @@ class PengajuanCuti extends Component
 
         ModelsCuti::create($this->form);
 
+        $direktur = User::where('tingkat_pekerjaan_sekarang_id', '2')->where('status', '1')->get();
+        $pegawai = User::find($this->form['user_id']);
+        $jenisCuti = ComCode::where('com_cd', $this->form['cuti_tp'])->first();
+
+        if ($this->form['tgl_mulai'] == $this->form['tgl_selesai']) {
+            $tanggal = Carbon::createFromFormat('Y-m-d', $this->form['tgl_mulai'])->isoFormat('D MMMM Y');
+        } else {
+            $tanggal = Carbon::createFromFormat('Y-m-d', $this->form['tgl_mulai'])->isoFormat('D MMMM ') . ' - ' . Carbon::createFromFormat('Y-m-d', $this->form['tgl_selesai'])->isoFormat('D MMMM Y');
+        }
+
+        $pesan = '*Notifikasi Pengajuan Cuti*' . urldecode('%0D%0A%0D%0A') .
+            'Nama : ' . $pegawai->name ?? '' . urldecode('%0D%0A') .
+            'Jenis Cuti : ' . $jenisCuti->code_nm . urldecode('%0D%0A') .
+            'Tanggal : ' . $tanggal . urldecode('%0D%0A%0D%0A') .
+            'Silahkan untuk menindaklajuti, klik pada halaman berikut' . urldecode('%0D%0A') .
+            url('/cuti')
+        ;
+
+        // //kirim WA ke direktur
+        // foreach ($direktur as $item) {
+        //     kirimPesan::dispatch($item->telpon, $pesan);
+        // }
+
         $this->reset();
 
         $this->js(<<<'JS'
@@ -127,10 +153,33 @@ class PengajuanCuti extends Component
         if ($property === 'form.cuti_tp') {
 
             // Hitung jumlah cuti yang telah diambil pada tahun dan bulan yang diberikan
-            $jumlahCuti = ModelsCuti::where('status_st', 'STATUS_ST_02')
+            $cekCutiSatuHari = ModelsCuti::where('status_st', 'STATUS_ST_02')
                 ->where('cuti_tp', 'CUTI_TP_01')
                 ->whereYear('tgl_mulai', date('Y'))
+                ->where('user_id', $this->form['user_id'])
+                ->whereColumn('tgl_mulai', 'tgl_selesai')
                 ->count();
+
+            $cekCutiLebihDariSatuHari = ModelsCuti::where('status_st', 'STATUS_ST_02')
+                ->where('cuti_tp', 'CUTI_TP_01')
+                ->whereYear('tgl_mulai', date('Y'))
+                ->where('user_id', $this->form['user_id'])
+                ->whereColumn('tgl_mulai', '!=', 'tgl_selesai')
+                ->get();
+
+            //menghitung jumlah hari 
+            $tampung = '';
+            $a = '';
+            foreach ($cekCutiLebihDariSatuHari as $item) {
+                $tgl_mulai = Carbon::parse($item->tgl_mulai);
+                $tgl_selesai = Carbon::parse($item->tgl_selesai);
+
+                $a = $tgl_selesai->diffInDays($tgl_mulai);
+                $a = $a + 1;
+                $tampung = (int) $tampung + $a;
+            }
+
+            $jumlahCuti = $tampung + $cekCutiSatuHari;
 
             //jika pegawai tetap bukan partimer
             if (auth()->user()->status_pekerjaan_id != 2) {
@@ -240,8 +289,41 @@ class PengajuanCuti extends Component
 
         $data = ModelsCuti::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
 
-        $jml_cuti_tahunan = ModelsCuti::where('user_id', auth()->user()->id)->whereYear('tgl_mulai', date('Y'))->where('cuti_tp', 'CUTI_TP_01')->where('status_st', 'STATUS_ST_02')->count();
-        $jml_cuti_tanpa_surat_dokter = ModelsCuti::where('user_id', auth()->user()->id)->whereYear('tgl_mulai', date('Y'))->where('cuti_tp', 'CUTI_TP_03')->where('status_st', 'STATUS_ST_02')->count();
+
+        // Hitung jumlah cuti tahunan
+        $cekCutiSatuHari = ModelsCuti::where('status_st', 'STATUS_ST_02')
+            ->where('cuti_tp', 'CUTI_TP_01')
+            ->whereYear('tgl_mulai', date('Y'))
+            ->where('user_id', $this->form['user_id'])
+            ->whereColumn('tgl_mulai', 'tgl_selesai')
+            ->count();
+
+        $cekCutiLebihDariSatuHari = ModelsCuti::where('status_st', 'STATUS_ST_02')
+            ->where('cuti_tp', 'CUTI_TP_01')
+            ->whereYear('tgl_mulai', date('Y'))
+            ->where('user_id', $this->form['user_id'])
+            ->whereColumn('tgl_mulai', '!=', 'tgl_selesai')
+            ->get();
+
+        //menghitung jumlah hari 
+        $tampung = '';
+        $a = '';
+        foreach ($cekCutiLebihDariSatuHari as $item) {
+            $tgl_mulai = Carbon::parse($item->tgl_mulai);
+            $tgl_selesai = Carbon::parse($item->tgl_selesai);
+
+            $a = $tgl_selesai->diffInDays($tgl_mulai);
+            $a = $a + 1;
+            $tampung = (int) $tampung + $a;
+        }
+
+        $jml_cuti_tahunan = (int) $tampung + (int) $cekCutiSatuHari;
+
+        $jml_cuti_tanpa_surat_dokter = ModelsCuti::where('user_id', auth()->user()->id)
+            ->whereYear('tgl_mulai', date('Y'))
+            ->where('cuti_tp', 'CUTI_TP_03')
+            ->where('status_st', 'STATUS_ST_02')
+            ->count();
 
         //jika partimer kuota 6
         if (auth()->user()->status_pekerjaan_id == 2) {
@@ -249,6 +331,7 @@ class PengajuanCuti extends Component
         } else {
             $kuota_cuti_tahunan = 12 - $jml_cuti_tahunan;
         }
+
         $kuota_cuti_tanpa_surat_dokter = 3 - $jml_cuti_tanpa_surat_dokter;
 
         return view('livewire.pengajuan-cuti', [

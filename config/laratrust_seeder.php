@@ -15,7 +15,10 @@ return [
         'superadmin' => [
             'users' => 'c,r,u,d',
         ],
-        'direktur_dan_administrator' => [
+        'direktur' => [
+            'users' => 'c,r,u,d',
+        ],
+        'administrator' => [
             'users' => 'c,r,u,d',
         ],
         'staff' => [
