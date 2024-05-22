@@ -125,10 +125,10 @@ class PengajuanCuti extends Component
             url('/cuti')
         ;
 
-        // //kirim WA ke direktur
-        // foreach ($direktur as $item) {
-        //     kirimPesan::dispatch($item->telpon, $pesan);
-        // }
+        //kirim WA ke direktur
+        foreach ($direktur as $item) {
+            kirimPesan::dispatch($item->telpon, $pesan);
+        }
 
         $this->reset();
 
