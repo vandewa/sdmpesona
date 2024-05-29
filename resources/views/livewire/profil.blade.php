@@ -266,43 +266,53 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mt-3">
-                                            <center>
-                                                <h5>Ganti Password</h5>
-                                            </center>
+                                        <div class="form-check mb-3 mt-3">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                                wire:model.live='check'>
+                                            <label class="form-check-label" for="exampleCheck1"><b>Ganti
+                                                    Password</b></label>
                                         </div>
 
-                                        <hr>
+                                        @if ($check)
+                                            <div class="mt-3">
+                                                <center>
+                                                    <h5>Ganti Password</h5>
+                                                </center>
+                                            </div>
 
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="row mb-2">
-                                                    <label for="inputName"
-                                                        class="col-sm-4 col-form-label">Password</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="password" class="form-control"
-                                                            wire:model='password'>
-                                                        @error('password')
-                                                            <span class="form-text text-danger">{{ $message }}</span>
-                                                        @enderror
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row mb-2">
+                                                        <label for="inputName"
+                                                            class="col-sm-4 col-form-label">Password</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="password" class="form-control"
+                                                                wire:model='password'>
+                                                            @error('password')
+                                                                <span
+                                                                    class="form-text text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="row mb-2">
+                                                        <label for="inputName"
+                                                            class="col-sm-4 col-form-label">Konfirmasi
+                                                            Password</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="password" class="form-control"
+                                                                wire:model='password_confirmation'>
+                                                            @error('password_confirmation')
+                                                                <span
+                                                                    class="form-text text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="row mb-2">
-                                                    <label for="inputName" class="col-sm-4 col-form-label">Konfirmasi
-                                                        Password</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="password" class="form-control"
-                                                            wire:model='password_confirmation'>
-                                                        @error('password_confirmation')
-                                                            <span class="form-text text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        @endif
 
                                         <div class="row mb-2">
                                             <div class="offset-sm-2 col-sm-8">

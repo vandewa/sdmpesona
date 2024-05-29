@@ -17,7 +17,7 @@ use App\Models\TunjanganPendidikan;
 class User extends Component
 {
 
-    public $role, $listRole, $konfirmasi_password, $idHapus, $edit = false, $user, $listStatusPekerjaan, $listNamaJabatan, $listTingkatPekerjaanAwal, $listKawin, $listPendidikan, $listMasaKerja, $masaKerja;
+    public $role, $listRole, $konfirmasi_password, $idHapus, $edit = false, $user, $listStatusPekerjaan, $listNamaJabatan, $listTingkatPekerjaanAwal, $listKawin, $listPendidikan, $listMasaKerja, $masaKerja, $check = false;
 
     public $form = [
         'name' => null,

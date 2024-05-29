@@ -20,7 +20,7 @@ class Profil extends Component
     public $idHapus, $edit = false, $idnya, $cari, $listKawin, $listPendidikan, $password, $password_confirmation;
     public $photo;
 
-    public $jabatan, $idKaryawan, $status, $nama;
+    public $jabatan, $idKaryawan, $status, $nama, $check = false;
 
     public $form = [
         'name' => null,
