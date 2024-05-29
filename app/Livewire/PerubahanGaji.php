@@ -94,7 +94,24 @@ class PerubahanGaji extends Component
 
     public function hapus()
     {
+        $cekUserId = ModelsPerubahanGaji::find($this->idHapus)->user_id;
+        $user = User::find($cekUserId);
+
         ModelsPerubahanGaji::destroy($this->idHapus);
+
+        $cekPerubahanGaji = ModelsPerubahanGaji::where('user_id', $cekUserId)->orderBy('created_at', 'desc')->first();
+
+        //cek jika ada oerubahan gaji sebelumnya jika ada ambil yang sudah ada jika tidak ada ambil dari gaji awal
+        if ($cekPerubahanGaji) {
+            User::find($cekUserId)->update([
+                'gapok_sekarang' => $cekPerubahanGaji->gapok_baru,
+            ]);
+        } else {
+            User::find($cekUserId)->update([
+                'gapok_sekarang' => $user->gapok_awal,
+            ]);
+        }
+
         $this->js(<<<'JS'
         Swal.fire({
             title: 'Good job!',

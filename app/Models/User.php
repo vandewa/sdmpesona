@@ -64,12 +64,12 @@ class User extends Authenticatable implements LaratrustUser
 
     public function jabatan()
     {
-        return $this->belongsTo(NamaJabatan::class, 'nama_jabatan_id');
+        return $this->belongsTo(NamaJabatan::class, 'nama_jabatan_sekarang_id');
     }
 
     public function tingkat()
     {
-        return $this->belongsTo(TingkatPekerjaan::class, 'tingkat_pekerjaan_awal_id');
+        return $this->belongsTo(TingkatPekerjaan::class, 'tingkat_pekerjaan_sekarang_id');
     }
 
     public function statusnya()

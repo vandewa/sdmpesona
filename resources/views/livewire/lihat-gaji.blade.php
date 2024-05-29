@@ -27,6 +27,7 @@
                                                                         <th>Gaji Pokok</th>
                                                                         <th>Tunjangan</th>
                                                                         <th>Jumlah Diterima</th>
+                                                                        <th>Slip Gaji</th>
                                                                     </thead>
                                                                     <tbody>
                                                                         @foreach ($post as $item)
@@ -38,6 +39,18 @@
                                                                                 <td>{{ \Laraindo\RupiahFormat::currency($item->jml_diterima_tunjangan ?? 0) }}
                                                                                 </td>
                                                                                 <td>{{ \Laraindo\RupiahFormat::currency($item->jml_diterima_tunjangan + $item->jml_diterima_gapok) }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="gap-3 table-actions d-flex align-items-center fs-6">
+                                                                                        <div class="mr-2">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-dark btn-flat btn-sm"
+                                                                                                wire:click="cetak('{{ $item->id }}')"><i
+                                                                                                    class="fas fa-print"></i>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach

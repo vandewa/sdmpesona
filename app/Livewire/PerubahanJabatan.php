@@ -88,6 +88,10 @@ class PerubahanJabatan extends Component
     public function store()
     {
         ModelsPerubahanJabatan::create($this->form);
+        User::find($this->form['user_id'])->update([
+            'nama_jabatan_sekarang_id' => $this->form['nama_jabatan_id'],
+            'tingkat_pekerjaan_sekarang_id' => $this->form['tingkat_pekerjaan_id']
+        ]);
     }
 
     public function delete($id)
@@ -113,7 +117,26 @@ class PerubahanJabatan extends Component
 
     public function hapus()
     {
+        $cekUserId = ModelsPerubahanJabatan::find($this->idHapus)->user_id;
+        $user = User::find($cekUserId);
+
         ModelsPerubahanJabatan::destroy($this->idHapus);
+
+        $cekPerubahanJabatan = ModelsPerubahanJabatan::where('user_id', $cekUserId)->orderBy('created_at', 'desc')->first();
+
+        //cek jika ada oerubahan jabatan sebelumnya jika ada ambil yang sudah ada jika tidak ada ambil dari jabatan awal
+        if ($cekPerubahanJabatan) {
+            User::find($cekUserId)->update([
+                'nama_jabatan_sekarang_id' => $cekPerubahanJabatan->nama_jabatan_id,
+                'tingkat_pekerjaan_sekarang_id' => $cekPerubahanJabatan->tingkat_pekerjaan_id
+            ]);
+        } else {
+            User::find($cekUserId)->update([
+                'nama_jabatan_sekarang_id' => $user->nama_jabatan_id,
+                'tingkat_pekerjaan_sekarang_id' => $user->tingkat_pekerjaan_awal_id
+            ]);
+        }
+
         $this->js(<<<'JS'
         Swal.fire({
             title: 'Good job!',
