@@ -647,63 +647,51 @@
                                                                     <hr>
 
                                                                     @if ($edit)
-                                                                        <div class="form-check mb-3 mt-3">
-                                                                            <input type="checkbox"
-                                                                                class="form-check-input"
-                                                                                id="exampleCheck1"
-                                                                                wire:model.live='check'>
-                                                                            <label class="form-check-label"
-                                                                                for="exampleCheck1"><b>Ganti
-                                                                                    Password</b></label>
-                                                                        </div>
-                                                                    @endif
-
-                                                                    @if ($check)
                                                                         <legend class="text-center mt-4">Ganti Password
                                                                         </legend>
                                                                         <hr>
+                                                                    @endif
 
-                                                                        <div class="row">
-                                                                            <div class="col-md-6">
-                                                                                <div class="row mb-2">
-                                                                                    <label for="inputEmail3"
-                                                                                        class="col-sm-4 col-form-label">Password
-                                                                                        <small
-                                                                                            class="text-danger">*</small>
-                                                                                    </label>
-                                                                                    <div class="col-sm-8">
-                                                                                        <input type="password"
-                                                                                            class="form-control"
-                                                                                            wire:model='form.password'
-                                                                                            placeholder="Password">
-                                                                                        @error('form.password')
-                                                                                            <span
-                                                                                                class="form-text text-danger">{{ $message }}</span>
-                                                                                        @enderror
-                                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="row mb-2">
+                                                                                <label for="inputEmail3"
+                                                                                    class="col-sm-4 col-form-label">Password
+                                                                                    <small
+                                                                                        class="text-danger">*</small>
+                                                                                </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <input type="password"
+                                                                                        class="form-control"
+                                                                                        wire:model='form.password'
+                                                                                        placeholder="Password">
+                                                                                    @error('form.password')
+                                                                                        <span
+                                                                                            class="form-text text-danger">{{ $message }}</span>
+                                                                                    @enderror
                                                                                 </div>
+                                                                            </div>
 
-                                                                                <div class="row mb-2">
-                                                                                    <label for="inputEmail3"
-                                                                                        class="col-sm-4 col-form-label">Konfirmasi
-                                                                                        Password
-                                                                                        <small
-                                                                                            class="text-danger">*</small>
-                                                                                    </label>
-                                                                                    <div class="col-sm-8">
-                                                                                        <input type="password"
-                                                                                            class="form-control"
-                                                                                            wire:model='konfirmasi_password'
-                                                                                            placeholder="Konfirmasi Password">
-                                                                                        @error('konfirmasi_password')
-                                                                                            <span
-                                                                                                class="form-text text-danger">{{ $message }}</span>
-                                                                                        @enderror
-                                                                                    </div>
+                                                                            <div class="row mb-2">
+                                                                                <label for="inputEmail3"
+                                                                                    class="col-sm-4 col-form-label">Konfirmasi
+                                                                                    Password
+                                                                                    <small
+                                                                                        class="text-danger">*</small>
+                                                                                </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <input type="password"
+                                                                                        class="form-control"
+                                                                                        wire:model='konfirmasi_password'
+                                                                                        placeholder="Konfirmasi Password">
+                                                                                    @error('konfirmasi_password')
+                                                                                        <span
+                                                                                            class="form-text text-danger">{{ $message }}</span>
+                                                                                    @enderror
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    @endif
+                                                                    </div>
 
                                                                 </div>
                                                                 <div class="card-footer">
