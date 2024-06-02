@@ -73,40 +73,104 @@
                           </li>
                       @endif
 
-                      {{-- @if (!auth()->user()->hasRole(['superadmin', 'direktur', 'administrator'])) --}}
-                      <li class="nav-item">
-                          <a href="{{ route('profil') }}"
-                              class="nav-link  {{ Request::segment(1) == 'profil' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-user"></i>
-                              <p>
-                                  Profil
-                              </p>
-                          </a>
-                      </li>
-                      {{-- @endif    --}}
+                      @if (!auth()->user()->hasRole(['ketua']))
+                          <li class="nav-item">
+                              <a href="{{ route('profil') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'profil' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-user"></i>
+                                  <p>
+                                      Profil
+                                  </p>
+                              </a>
+                          </li>
+                      @endif
 
-                      <li class="nav-item">
-                          <a href="{{ route('lihat-gaji') }}"
-                              class="nav-link  {{ Request::segment(1) == 'lihat-gaji' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-circle-dollar-to-slot"></i>
-                              <p>
-                                  Gaji
-                              </p>
-                          </a>
-                      </li>
+                      {{-- //anggota dewas --}}
+                      @if (auth()->user()->nama_jabatan_sekarang_id == 11 && auth()->user()->status == 1)
+                          <li class="nav-item">
+                              <a href="{{ route('kpi-penilaian-index') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'kpi-penilaian-index' ? 'active' : '' }}{{ Request::segment(1) == 'kpi-penilaian' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-pencil"></i>
+                                  <p>
+                                      KPI Penilaian Direksi
+                                  </p>
+                              </a>
+                          </li>
+                      @endif
 
-                      {{-- <li class="nav-item">
-                          <a href="{{ route('pengajuan-cuti') }}"
-                              class="nav-link  {{ Request::segment(1) == 'pengajuan-cuti' ? 'active' : '' }}">
-                              <i class="nav-icon fas fa-calendar"></i>
-                              <p>
-                                  Pengajuan Cuti
-                              </p>
-                          </a>
-                      </li> --}}
+                      @if (auth()->user()->hasRole(['superadmin']))
+                          {{-- <li class="nav-item">
+                              <a href="{{ route('kpi-penilaian-index') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'kpi-penilaian-index' ? 'active' : '' }}{{ Request::segment(1) == 'kpi-penilaian' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-pencil"></i>
+                                  <p>
+                                      KPI Penilaian Direksi
+                                  </p>
+                              </a>
+                          </li> --}}
+                      @endif
+
+                      {{-- //ketua dewas --}}
+                      @if (auth()->user()->hasRole(['ketua']) && auth()->user()->status == 1)
+                          {{-- <li class="nav-item">
+                              <a href="{{ route('kpi-penilaian-index') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'kpi-penilaian-index' ? 'active' : '' }}{{ Request::segment(1) == 'kpi-penilaian' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-pencil"></i>
+                                  <p>
+                                      KPI Penilaian Direksi
+                                  </p>
+                              </a>
+                          </li> --}}
+                          <li class="nav-item">
+                              <a href="{{ route('password') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'ganti-password' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-key"></i>
+                                  <p>
+                                      Ganti Password
+                                  </p>
+                              </a>
+                          </li>
+                      @endif
+
+                      @if (auth()->user()->hasRole(['direktur', 'superadmin']))
+                          {{-- <li class="nav-item">
+                              <a href="{{ route('penilaian-silang') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'penilaian-silang' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-pencil"></i>
+                                  <p>
+                                      Penilaian Silang Direksi
+                                  </p>
+                              </a>
+                          </li> --}}
+                      @endif
+
+
+                      @if (!auth()->user()->hasRole(['ketua']))
+                          <li class="nav-item">
+                              <a href="{{ route('lihat-gaji') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'lihat-gaji' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-circle-dollar-to-slot"></i>
+                                  <p>
+                                      Gaji
+                                  </p>
+                              </a>
+                          </li>
+
+
+                          <li class="nav-item">
+                              <a href="{{ route('pengajuan-cuti') }}"
+                                  class="nav-link  {{ Request::segment(1) == 'pengajuan-cuti' ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-calendar"></i>
+                                  <p>
+                                      Pengajuan Cuti
+                                  </p>
+                              </a>
+                          </li>
+                      @endif
+
 
                       @if (auth()->user()->hasRole(['superadmin', 'direktur', 'administrator']))
-                          {{-- <li class="nav-item">
+                          <li class="nav-item">
                               <a href="{{ route('cuti') }}"
                                   class="nav-link  {{ Request::segment(1) == 'cuti' ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-calendar-check"></i>
@@ -119,7 +183,7 @@
                                       <span class="badge badge-danger ml-2">{{ cekCuti() }}</span>
                                   @endif
                               </a>
-                          </li> --}}
+                          </li>
                           <li class="nav-item">
                               <a href="{{ route('gaji-index') }}"
                                   class="nav-link  {{ Request::segment(1) == 'gaji-index' ? 'active' : '' }}{{ Request::segment(1) == 'gaji' ? 'active' : '' }}">
@@ -206,6 +270,7 @@
                                 {{ Request::segment(2) == 'tunjangan-kpi-pelaksana-divisi' ? 'menu-is-opening menu-open' : '' }}
                                 {{ Request::segment(2) == 'tunjangan-kpi-partimer' ? 'menu-is-opening menu-open' : '' }}
                                 {{ Request::segment(2) == 'cuti-alasan-penting' ? 'menu-is-opening menu-open' : '' }}
+                                {{ Request::segment(2) == 'ketua-dewas' ? 'menu-is-opening menu-open' : '' }}
                               ">
                               <a href="#"
                                   class="nav-link
@@ -221,6 +286,7 @@
                                   {{ Request::segment(2) == 'tunjangan-kpi-pelaksana-divisi' ? 'active' : '' }}
                                   {{ Request::segment(2) == 'tunjangan-kpi-partimer' ? 'active' : '' }}
                                   {{ Request::segment(2) == 'cuti-alasan-penting' ? 'active' : '' }}
+                                  {{ Request::segment(2) == 'ketua-dewas' ? 'active' : '' }}
                                   ">
                                   <i class="nav-icon fa-solid fa-laptop"></i>
                                   <p>
@@ -243,6 +309,19 @@
                                               <i class="far fa-circle nav-icon ml-2"></i>
                                           @endif
                                           <p>Pegawai</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.ketua-dewas') }}"
+                                          class="nav-link 
+                                      {{ Request::segment(2) == 'ketua-dewas' ? 'active' : '' }}
+                                      ">
+                                          @if (Request::segment(2) == 'ketua-dewas')
+                                              <i class="far fa-dot-circle nav-icon ml-2"></i>
+                                          @else
+                                              <i class="far fa-circle nav-icon ml-2"></i>
+                                          @endif
+                                          <p>Ketua Dewas</p>
                                       </a>
                                   </li>
                                   <li class="nav-item">

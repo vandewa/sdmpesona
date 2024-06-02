@@ -83,7 +83,7 @@
                                                                                     </a>
 
                                                                                     <button type="button"
-                                                                                        class="btn btn-sm btn-danger"
+                                                                                        class="btn btn-sm btn-danger mb-2"
                                                                                         wire:click="delete('{{ $item->id }}')">Hapus
                                                                                     </button>
                                                                                 </td>

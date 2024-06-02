@@ -47,7 +47,10 @@ class UserIndex extends Component
     }
     public function render()
     {
-        $data = User::cari($this->cari)->where('status', 1)->whereHas('jabatan')->paginate(10);
+        $data = User::cari($this->cari)->where('status', 1)
+            ->whereHas('jabatan', function ($a) {
+                $a->where('id', '!=', '12');
+            })->paginate(10);
 
         return view('livewire.user-index', [
             'posts' => $data

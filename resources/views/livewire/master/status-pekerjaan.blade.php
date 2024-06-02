@@ -103,6 +103,7 @@
                                                                                                     wire:click="delete('{{ $item->id }}')"><i
                                                                                                         class="fas fa-trash"></i>
                                                                                                 </button>
+
                                                                                             </div>
                                                                                         </div>
                                                                                     </td>

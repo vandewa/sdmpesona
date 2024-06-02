@@ -28,6 +28,8 @@ class DashboardController extends Controller
             $total_gaji = $jml_diterima_gapok + $jml_diterima_tunjangan;
 
             return view('dashboard.index', compact('laki', 'perempuan', 'total', 'total_gaji'));
+        } elseif (auth()->user()->hasRole(['ketua'])) {
+            return redirect(route('kpi-penilaian-index'));
         } else {
             return redirect(route('profil'));
         }

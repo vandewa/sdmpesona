@@ -8,6 +8,7 @@ use App\Models\ComCode;
 use Livewire\Component;
 use App\Models\NamaJabatan;
 use Illuminate\Support\Arr;
+use Livewire\WithFileUploads;
 use App\Models\StatusPekerjaan;
 use App\Models\TingkatPekerjaan;
 use App\Models\TunjanganMasaKerja;
@@ -17,7 +18,9 @@ use App\Models\TunjanganPendidikan;
 class User extends Component
 {
 
-    public $role, $listRole, $konfirmasi_password, $idHapus, $edit = false, $user, $listStatusPekerjaan, $listNamaJabatan, $listTingkatPekerjaanAwal, $listKawin, $listPendidikan, $listMasaKerja, $masaKerja, $check = false;
+    public $role, $listRole, $konfirmasi_password, $idHapus, $edit = false, $user, $listStatusPekerjaan, $listNamaJabatan, $listTingkatPekerjaanAwal, $listKawin, $listPendidikan, $listMasaKerja, $masaKerja, $check = false, $photo;
+
+    use WithFileUploads;
 
     public $form = [
         'name' => null,
@@ -48,6 +51,7 @@ class User extends Component
         'password' => null,
         'tunjangan_pendidikan_id' => null,
         'tunjangan_masa_kerja_id' => null,
+        'path_tanda_tangan' => null,
     ];
 
 
@@ -79,7 +83,7 @@ class User extends Component
 
     public function ambilRole()
     {
-        return Role::all()->toArray();
+        return Role::whereNotIn('id', ['1', '5'])->get()->toArray();
     }
 
     public function ambilKawin()
@@ -110,9 +114,6 @@ class User extends Component
     {
         return TunjanganMasaKerja::all()->toArray();
     }
-
-
-
 
     public function save()
     {
@@ -171,6 +172,11 @@ class User extends Component
 
         if ($this->form['password'] ?? "") {
             $this->form['password'] = bcrypt($this->form['password']);
+        }
+
+        if ($this->photo) {
+            $foto = $this->photo->store('public/foto', 'local');
+            $this->form['path_tanda_tangan'] = $foto;
         }
 
         ModelsUser::find($this->user)->update($this->form);

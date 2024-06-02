@@ -60,6 +60,10 @@ class NamaJabatanSeeder extends Seeder
                 'id' => '11',
                 'nama' => 'Dewan Pengawas',
             ],
+            [
+                'id' => '12',
+                'nama' => 'Ketua Dewan Pengawas',
+            ],
         ];
 
         foreach ($data as $datum) {
