@@ -400,6 +400,11 @@
                                                                                                     title="Edit"><i
                                                                                                         class="fas fa-pencil-alt"></i>
                                                                                                 </button>
+                                                                                                <button type="button"
+                                                                                                    class="btn btn-danger btn-flat btn-sm"
+                                                                                                    wire:click="delete('{{ $item->id }}')"><i
+                                                                                                        class="fas fa-trash"></i>
+                                                                                                </button>
                                                                                             </div>
                                                                                         </div>
                                                                                     </td>

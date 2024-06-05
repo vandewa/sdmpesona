@@ -179,7 +179,7 @@ class PengajuanCuti extends Component
                 $tampung = (int) $tampung + $a;
             }
 
-            $jumlahCuti = $tampung + $cekCutiSatuHari;
+            $jumlahCuti = (int) $tampung + (int) $cekCutiSatuHari;
 
             //jika pegawai tetap bukan partimer
             if (auth()->user()->status_pekerjaan_id != 2) {
