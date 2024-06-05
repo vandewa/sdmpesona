@@ -189,29 +189,10 @@ class PengajuanCuti extends Component
 
                     if ($jumlahCuti >= 12) {
                         $this->js(<<<'JS'
-                    Swal.fire({
-                        icon: "error",
-                        title: "Maaf",
-                        text: "Kuota Cuti Tahunan Telah Habis!",
-                        confirmButtonText: "OK"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                $wire.kembali()
-                            }
-                        })
-                    JS);
-                    }
-
-                    //cek bulan ini sudah ada pengajuan cuti belum
-                    $cekCutiBulanIni = ModelsCuti::whereMonth('tgl_mulai', date('m'))->where('status_st', 'STATUS_ST_02')->where('cuti_tp', 'CUTI_TP_01')->count();
-
-                    //maksimal cuti 1 bulan sekali
-                    if ($cekCutiBulanIni >= 1) {
-                        $this->js(<<<'JS'
                         Swal.fire({
                             icon: "error",
                             title: "Maaf",
-                            text: "Cuti Tahunan Hanya Bisa Dilakukan 1 Bulan Sekali!",
+                            text: "Kuota Cuti Tahunan Telah Habis!",
                             confirmButtonText: "OK"
                             }).then((result) => {
                                 if (result.isConfirmed) {
@@ -220,6 +201,25 @@ class PengajuanCuti extends Component
                             })
                         JS);
                     }
+
+                    //cek bulan ini sudah ada pengajuan cuti belum
+                    $cekCutiBulanIni = ModelsCuti::whereMonth('tgl_mulai', date('m'))->where('status_st', 'STATUS_ST_02')->where('cuti_tp', 'CUTI_TP_01')->count();
+
+                    //maksimal cuti 1 bulan sekali
+                    // if ($cekCutiBulanIni >= 1) {
+                    //     $this->js(<<<'JS'
+                    //     Swal.fire({
+                    //         icon: "error",
+                    //         title: "Maaf",
+                    //         text: "Cuti Tahunan Hanya Bisa Dilakukan 1 Bulan Sekali!",
+                    //         confirmButtonText: "OK"
+                    //         }).then((result) => {
+                    //             if (result.isConfirmed) {
+                    //                 $wire.kembali()
+                    //             }
+                    //         })
+                    //     JS);
+                    // }
                 }
 
                 // // Hitung jumlah cuti yang telah diambil pada tahun dan bulan yang diberikan
