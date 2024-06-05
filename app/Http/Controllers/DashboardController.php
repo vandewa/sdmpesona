@@ -23,8 +23,8 @@ class DashboardController extends Controller
             $perempuan = User::where('jk', 'p')->count();
             $total = User::whereHas('jabatan')->where('status', '1')->count();
 
-            $jml_diterima_gapok = Gaji::sum('jml_diterima_gapok');
-            $jml_diterima_tunjangan = Gaji::sum('jml_diterima_tunjangan');
+            $jml_diterima_gapok = Gaji::whereYear('tanggal_penggajian', date('Y'))->sum('jml_diterima_gapok');
+            $jml_diterima_tunjangan = Gaji::whereYear('tanggal_penggajian', date('Y'))->sum('jml_diterima_tunjangan');
             $total_gaji = $jml_diterima_gapok + $jml_diterima_tunjangan;
 
             return view('dashboard.index', compact('laki', 'perempuan', 'total', 'total_gaji'));

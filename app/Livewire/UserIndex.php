@@ -47,7 +47,7 @@ class UserIndex extends Component
     }
     public function render()
     {
-        $data = User::cari($this->cari)->where('status', 1)
+        $data = User::cari($this->cari)
             ->whereHas('jabatan', function ($a) {
                 $a->where('id', '!=', '12');
             })->paginate(10);

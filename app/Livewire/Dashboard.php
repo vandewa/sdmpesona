@@ -24,8 +24,8 @@ class Dashboard extends Component
             $this->perempuan = User::where('jk', 'p')->count();
             $this->total = User::whereHas('jabatan')->where('status', '1')->count();
 
-            $jml_diterima_gapok = Gaji::sum('jml_diterima_gapok');
-            $jml_diterima_tunjangan = Gaji::sum('jml_diterima_tunjangan');
+            $jml_diterima_gapok = Gaji::whereYear('tanggal_penggajian', date('Y'))->sum('jml_diterima_gapok');
+            $jml_diterima_tunjangan = Gaji::whereYear('tanggal_penggajian', date('Y'))->sum('jml_diterima_tunjangan');
             $this->total_gaji = $jml_diterima_gapok + $jml_diterima_tunjangan;
 
         } elseif (auth()->user()->hasRole(['ketua'])) {
