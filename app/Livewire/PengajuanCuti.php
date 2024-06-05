@@ -118,7 +118,7 @@ class PengajuanCuti extends Component
         }
 
         $pesan = '*Notifikasi Pengajuan Cuti*' . urldecode('%0D%0A%0D%0A') .
-            'Nama : ' . $pegawai->name ?? '' . urldecode('%0D%0A') .
+            'Nama : ' . $pegawai->name . urldecode('%0D%0A') .
             'Jenis Cuti : ' . $jenisCuti->code_nm . urldecode('%0D%0A') .
             'Tanggal : ' . $tanggal . urldecode('%0D%0A%0D%0A') .
             'Silahkan untuk menindaklajuti, klik pada halaman berikut' . urldecode('%0D%0A') .
