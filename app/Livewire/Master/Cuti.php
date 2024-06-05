@@ -108,6 +108,9 @@ class Cuti extends Component
         //cek data pegawai / jenis cuti / tanggal
         $pegawai = User::find($this->form['user_id']);
         $jenisCuti = ComCode::where('com_cd', $this->form['cuti_tp'])->first();
+        $direktur = User::where('tingkat_pekerjaan_sekarang_id', '2')->where('status', '1')->get();
+
+
         if ($this->form['tgl_mulai'] == $this->form['tgl_selesai']) {
             $tanggal = Carbon::createFromFormat('Y-m-d', $this->form['tgl_mulai'])->isoFormat('D MMMM Y');
         } else {
@@ -128,7 +131,13 @@ class Cuti extends Component
             ;
 
             //kirim pesan ke pegawai
-            // kirimPesan::dispatch($pegawai->telpon, $pesan);
+            kirimPesan::dispatch($pegawai->telpon, $pesan);
+
+            //kirim WA ke direktur
+            foreach ($direktur as $item) {
+                kirimPesan::dispatch($item->telpon, $pesan);
+            }
+
         }
 
         //jika minimal 2 direktur setuju maka pengajuan cuti disetujui
@@ -147,7 +156,12 @@ class Cuti extends Component
             ;
 
             //kirim pesan ke pegawai
-            // kirimPesan::dispatch($pegawai->telpon, $pesan);
+            kirimPesan::dispatch($pegawai->telpon, $pesan);
+
+            //kirim WA ke direktur
+            foreach ($direktur as $item) {
+                kirimPesan::dispatch($item->telpon, $pesan);
+            }
         }
 
         $this->reset();
