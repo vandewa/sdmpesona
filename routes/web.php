@@ -40,6 +40,7 @@ use App\Livewire\ManagementFileAdministrasi;
 use App\Livewire\Master\TunjanganPendidikan;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\KpiPenilaianDireksiIndex;
+use App\Livewire\KuotaCutiTahunan;
 use App\Livewire\Master\TunjanganKpiPartimer;
 use App\Livewire\Master\TunjanganKpiPelaksanaDivisi;
 use App\Livewire\PenilaianSilangDireksi;
@@ -100,6 +101,7 @@ Route::middleware([
         Route::get('tunjangan-kehadiran', TunjanganKehadiran::class)->name('tunjangan-kehadiran');
         Route::get('tunjangan-kpi-pelaksana-divisi', TunjanganKpiPelaksanaDivisi::class)->name('tunjangan-kpi-pelaksana-divisi');
         Route::get('tunjangan-kpi-partimer', TunjanganKpiPartimer::class)->name('tunjangan-kpi-partimer');
+        Route::get('kuota-cuti-tahunan', KuotaCutiTahunan::class)->name('kuota-cuti-tahunan');
 
     });
 
@@ -117,6 +119,4 @@ Route::middleware([
     Route::get('kpi-penilaian/{id?}', KpiPenilaianDireksi::class)->name('kpi-penilaian');
     Route::get('penilaian-silang', PenilaianSilangDireksi::class)->name('penilaian-silang');
     Route::get('kpi-penilaian-index', KpiPenilaianDireksiIndex::class)->name('kpi-penilaian-index');
-
-
 });

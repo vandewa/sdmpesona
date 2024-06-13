@@ -188,7 +188,7 @@
                                                                                             class="gap-3 table-actions d-flex align-items-center fs-6">
                                                                                             <div class="mr-2">
                                                                                                 <button type="button"
-                                                                                                    class="btn btn-danger btn-flat btn-sm"
+                                                                                                    class="btn btn-danger btn-flat btn-sm mb-2"
                                                                                                     wire:click="delete('{{ $item->id }}')"><i
                                                                                                         class="fas fa-trash"></i>
                                                                                                 </button>

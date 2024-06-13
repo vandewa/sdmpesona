@@ -119,7 +119,7 @@
                                                     data-placement="left" title="Detail"><i
                                                         class="fas fa-eye mr-2"></i>Detail</a>
                                                 @if (auth()->user()->hasRole('desa'))
-                                                    <button type="button" class="btn btn-danger btn-flat btn-sm"
+                                                    <button type="button" class="btn btn-danger btn-flat btn-sm mb-2"
                                                         wire:click="delete('{{ $item->id }}')"><i
                                                             class="fas fa-trash mr-2"></i>Hapus</button>
                                                 @endif

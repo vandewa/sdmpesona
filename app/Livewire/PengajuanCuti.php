@@ -12,13 +12,14 @@ use Livewire\WithPagination;
 use App\Models\PersetujuanCuti;
 use App\Models\CutiAlasanPenting;
 use App\Models\Cuti as ModelsCuti;
+use App\Models\KuotaCutiTahunan;
 
 class PengajuanCuti extends Component
 {
 
     use WithPagination;
 
-    public $idHapus, $edit = false, $idnya, $cari, $listJenisCuti, $listStatus, $listCutiAlasanPenting, $jenisCutiAlasanPenting = false, $cekTL = false;
+    public $idHapus, $edit = false, $idnya, $cari, $listJenisCuti, $listStatus, $listCutiAlasanPenting, $jenisCutiAlasanPenting = false, $cekTL = false, $kuotaPegawaiTetap, $kuotaPegawaiPartimer;
 
     public $form = [
         'user_id' => null,
@@ -42,6 +43,9 @@ class PengajuanCuti extends Component
         $this->form['tgl_mulai'] = date('Y-m-d');
         $this->form['tgl_selesai'] = date('Y-m-d');
         $this->form['user_id'] = auth()->user()->id;
+
+        $this->kuotaPegawaiTetap = KuotaCutiTahunan::where('id', 1)->first()->jumlah;
+        $this->kuotaPegawaiPartimer = KuotaCutiTahunan::where('id', 2)->first()->jumlah;
     }
 
     public function ambilJenisCuti()
@@ -127,17 +131,20 @@ class PengajuanCuti extends Component
 
         //kirim WA ke direktur
         foreach ($direktur as $item) {
-            kirimPesan::dispatch($item->telpon, $pesan);
+            // kirimPesan::dispatch($item->telpon, $pesan);
         }
-
-        $this->reset();
 
         $this->js(<<<'JS'
         Swal.fire({
-            title: 'Berhasil!',
-            text: 'Pengajuan cuti telah dikirim!',
+            title: 'Good job!',
+            text: 'You clicked the button!',
             icon: 'success',
-          })
+            confirmButtonText: "OK"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $wire.kembali()
+                }
+            })
         JS);
     }
 
@@ -187,7 +194,7 @@ class PengajuanCuti extends Component
                 // //cek cuti tahunan
                 if ($this->form['cuti_tp'] == 'CUTI_TP_01') {
 
-                    if ($jumlahCuti >= 12) {
+                    if ($jumlahCuti >= $this->kuotaPegawaiTetap) {
                         $this->js(<<<'JS'
                         Swal.fire({
                             icon: "error",
@@ -234,7 +241,7 @@ class PengajuanCuti extends Component
 
             } else {
                 //pegawai partimer
-                if ($jumlahCuti >= 6) {
+                if ($jumlahCuti >= $this->kuotaPegawaiPartimer) {
                     $this->js(<<<'JS'
                     Swal.fire({
                         icon: "error",
@@ -289,7 +296,6 @@ class PengajuanCuti extends Component
 
         $data = ModelsCuti::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
 
-
         // Hitung jumlah cuti tahunan
         $cekCutiSatuHari = ModelsCuti::where('status_st', 'STATUS_ST_02')
             ->where('cuti_tp', 'CUTI_TP_01')
@@ -308,6 +314,7 @@ class PengajuanCuti extends Component
         //menghitung jumlah hari 
         $tampung = '';
         $a = '';
+
         foreach ($cekCutiLebihDariSatuHari as $item) {
             $tgl_mulai = Carbon::parse($item->tgl_mulai);
             $tgl_selesai = Carbon::parse($item->tgl_selesai);
@@ -327,9 +334,9 @@ class PengajuanCuti extends Component
 
         //jika partimer kuota 6
         if (auth()->user()->status_pekerjaan_id == 2) {
-            $kuota_cuti_tahunan = 6 - $jml_cuti_tahunan;
+            $kuota_cuti_tahunan = $this->kuotaPegawaiPartimer - $jml_cuti_tahunan;
         } else {
-            $kuota_cuti_tahunan = 12 - $jml_cuti_tahunan;
+            $kuota_cuti_tahunan = $this->kuotaPegawaiTetap - $jml_cuti_tahunan;
         }
 
         $kuota_cuti_tanpa_surat_dokter = 3 - $jml_cuti_tanpa_surat_dokter;

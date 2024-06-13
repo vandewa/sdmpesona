@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TunjanganKehadiranSeeder::class);
         $this->call(TunjanganKpiPelaksanaDivisiSeeder::class);
         $this->call(TunjanganKpiPartimerSeeder::class);
+        $this->call(KuotaCutiTahunanSeeder::class);
     }
 }

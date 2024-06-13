@@ -271,6 +271,7 @@
                                 {{ Request::segment(2) == 'tunjangan-kpi-partimer' ? 'menu-is-opening menu-open' : '' }}
                                 {{ Request::segment(2) == 'cuti-alasan-penting' ? 'menu-is-opening menu-open' : '' }}
                                 {{ Request::segment(2) == 'ketua-dewas' ? 'menu-is-opening menu-open' : '' }}
+                                {{ Request::segment(2) == 'kuota-cuti-tahunan' ? 'menu-is-opening menu-open' : '' }}
                               ">
                               <a href="#"
                                   class="nav-link
@@ -287,6 +288,7 @@
                                   {{ Request::segment(2) == 'tunjangan-kpi-partimer' ? 'active' : '' }}
                                   {{ Request::segment(2) == 'cuti-alasan-penting' ? 'active' : '' }}
                                   {{ Request::segment(2) == 'ketua-dewas' ? 'active' : '' }}
+                                  {{ Request::segment(2) == 'kuota-cuti-tahunan' ? 'active' : '' }}
                                   ">
                                   <i class="nav-icon fa-solid fa-laptop"></i>
                                   <p>
@@ -322,6 +324,19 @@
                                               <i class="far fa-circle nav-icon ml-2"></i>
                                           @endif
                                           <p>Ketua Dewas</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="{{ route('master.kuota-cuti-tahunan') }}"
+                                          class="nav-link 
+                                      {{ Request::segment(2) == 'kuota-cuti-tahunan' ? 'active' : '' }}
+                                      ">
+                                          @if (Request::segment(2) == 'kuota-cuti-tahunan')
+                                              <i class="far fa-dot-circle nav-icon ml-2"></i>
+                                          @else
+                                              <i class="far fa-circle nav-icon ml-2"></i>
+                                          @endif
+                                          <p>Kuota Cuti Tahunan</p>
                                       </a>
                                   </li>
                                   <li class="nav-item">

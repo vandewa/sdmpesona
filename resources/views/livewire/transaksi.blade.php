@@ -389,7 +389,7 @@
                                                                                                             <button
                                                                                                                 type="button"
                                                                                                                 wire:click="getEdit('{{ $item->id }}')"
-                                                                                                                class="btn btn-warning btn-flat btn-sm"
+                                                                                                                class="btn btn-warning btn-flat btn-sm mb-2"
                                                                                                                 data-toggle="tooltip"
                                                                                                                 data-placement="left"
                                                                                                                 title="Edit"><i
@@ -398,7 +398,7 @@
                                                                                                             </button>
                                                                                                             <button
                                                                                                                 type="button"
-                                                                                                                class="btn btn-danger btn-flat btn-sm"
+                                                                                                                class="btn btn-danger btn-flat btn-sm mb-2"
                                                                                                                 wire:click="delete('{{ $item->id }}')"><i
                                                                                                                     class="fas fa-trash"></i>
                                                                                                                 Hapus
