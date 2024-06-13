@@ -10,7 +10,7 @@
                             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Total Pegawai</span>
+                                <span class="info-box-text">Total Pegawai Aktif</span>
                                 <span class="info-box-number">
                                     {{ $total }}
                                 </span>
@@ -55,7 +55,7 @@
                             <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-dollar-sign"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Total Gaji</span>
+                                <span class="info-box-text">Total Gaji Semua Pegawai</span>
                                 <span class="info-box-number">{{ \Laraindo\RupiahFormat::currency($total_gaji) }}</span>
                             </div>
                             <!-- /.info-box-content -->
