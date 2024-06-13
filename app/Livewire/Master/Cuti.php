@@ -131,11 +131,11 @@ class Cuti extends Component
             ;
 
             //kirim pesan ke pegawai
-            // kirimPesan::dispatch($pegawai->telpon, $pesan);
+            kirimPesan::dispatch($pegawai->telpon, $pesan);
 
             //kirim WA ke direktur
             foreach ($direktur as $item) {
-                // kirimPesan::dispatch($item->telpon, $pesan);
+                kirimPesan::dispatch($item->telpon, $pesan);
             }
 
         }
@@ -156,11 +156,11 @@ class Cuti extends Component
             ;
 
             //kirim pesan ke pegawai
-            // kirimPesan::dispatch($pegawai->telpon, $pesan);
+            kirimPesan::dispatch($pegawai->telpon, $pesan);
 
             //kirim WA ke direktur
             foreach ($direktur as $item) {
-                // kirimPesan::dispatch($item->telpon, $pesan);
+                kirimPesan::dispatch($item->telpon, $pesan);
             }
         }
 
