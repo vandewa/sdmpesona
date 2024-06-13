@@ -20,8 +20,8 @@ class Dashboard extends Component
     public function mount()
     {
         if (auth()->user()->hasRole(['superadmin', 'direktur'])) {
-            $this->laki = User::where('jk', 'l')->count();
-            $this->perempuan = User::where('jk', 'p')->count();
+            $this->laki = User::where('jk', 'l')->where('status', '1')->count();
+            $this->perempuan = User::where('jk', 'p')->where('status', '1')->count();
             $this->total = User::whereHas('jabatan')->where('status', '1')->count();
 
             $jml_diterima_gapok = Gaji::whereYear('tanggal_penggajian', date('Y'))->sum('jml_diterima_gapok');

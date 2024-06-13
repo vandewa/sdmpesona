@@ -10,6 +10,7 @@ use App\Jobs\kirimPesan;
 use Illuminate\Support\Arr;
 use Livewire\WithPagination;
 use App\Models\PersetujuanCuti;
+use App\Models\KuotaCutiTahunan;
 use App\Models\CutiAlasanPenting;
 use App\Models\Cuti as ModelsCuti;
 
@@ -18,7 +19,7 @@ class Cuti extends Component
 
     use WithPagination;
 
-    public $idHapus, $edit = false, $idnya, $cari, $listJenisCuti, $listStatus, $listCutiAlasanPenting, $jenisCutiAlasanPenting = false, $cekTL = false, $persetujuanDirektur, $cekPertujuanDirektur, $keteranganDirektur, $tampilKeterangan = false;
+    public $idHapus, $edit = false, $idnya, $cari, $listJenisCuti, $listStatus, $listCutiAlasanPenting, $jenisCutiAlasanPenting = false, $cekTL = false, $persetujuanDirektur, $cekPertujuanDirektur, $keteranganDirektur, $tampilKeterangan = false, $kuotaPegawaiTetap, $kuotaPegawaiPartimer;
 
     public $form = [
         'user_id' => null,
@@ -40,6 +41,9 @@ class Cuti extends Component
         $this->listJenisCuti = $this->ambilJenisCuti();
         $this->listCutiAlasanPenting = $this->ambilCutiAlasanPenting();
         $this->listStatus = $this->ambilStatus();
+
+        $this->kuotaPegawaiTetap = KuotaCutiTahunan::where('id', 1)->first()->jumlah;
+        $this->kuotaPegawaiPartimer = KuotaCutiTahunan::where('id', 2)->first()->jumlah;
     }
 
     public function ambilJenisCuti()
@@ -120,14 +124,16 @@ class Cuti extends Component
         //jika salah satu direktur menolak
         if ($this->persetujuanDirektur == 'STATUS_ST_03') {
             ModelsCuti::find($this->idHapus)->update([
-                'status_st' => $this->persetujuanDirektur
+                'status_st' => $this->persetujuanDirektur,
+                'keterangan_direktur' => $this->form['keterangan_direktur']
             ]);
 
             $pesan = '*Notifikasi Pengajuan Cuti*' . urldecode('%0D%0A%0D%0A') .
                 'Nama : ' . $pegawai->name . urldecode('%0D%0A') .
                 'Jenis Cuti : ' . $jenisCuti->code_nm . urldecode('%0D%0A') .
                 'Tanggal : ' . $tanggal . urldecode('%0D%0A%0D%0A') .
-                '*DITOLAK*';
+                '*DITOLAK*' . urldecode('%0D%0A') .
+                ($this->form['keterangan_direktur']);
             ;
 
             //kirim pesan ke pegawai
@@ -227,27 +233,85 @@ class Cuti extends Component
 
     public function render()
     {
-        $kuotaCutiTahunan = '';
-        $kuotaCutiTanpaSuratDokter = '';
+
+        // $kuotaCutiTahunan = '';
+        // $kuotaCutiTanpaSuratDokter = '';
+
+        $kuota_cuti_tahunan = '';
+        $kuota_cuti_tanpa_surat_dokter = '';
+
+        //menghitung jumlah hari 
+        $tampung = '';
+        $a = '';
 
         $data = ModelsCuti::cari($this->cari);
         //filter berdasarkan jenis pengumpulan
         if ($this->idnya) {
-            $data->where('user_id', $this->idnya);
 
-            $user = User::find($this->idnya);
-            //partimer jumlah cuti tahunan
-            if ($user->status_pekerjaan_id == 2) {
-                $cutiTahunan = 6;
-            } else {
-                $cutiTahunan = 12;
+            $data->where('user_id', $this->idnya);  
+
+            // Hitung jumlah cuti tahunan
+            $cekCutiSatuHari = ModelsCuti::where('status_st', 'STATUS_ST_02')
+                ->where('cuti_tp', 'CUTI_TP_01')
+                ->whereYear('tgl_mulai', date('Y'))
+                ->where('user_id', $this->idnya)
+                ->whereColumn('tgl_mulai', 'tgl_selesai')
+                ->count();
+
+            $cekCutiLebihDariSatuHari = ModelsCuti::where('status_st', 'STATUS_ST_02')
+                ->where('cuti_tp', 'CUTI_TP_01')
+                ->whereYear('tgl_mulai', date('Y'))
+                ->where('user_id', $this->idnya)
+                ->whereColumn('tgl_mulai', '!=', 'tgl_selesai')
+                ->get();
+
+            foreach ($cekCutiLebihDariSatuHari as $item) {
+                $tgl_mulai = Carbon::parse($item->tgl_mulai);
+                $tgl_selesai = Carbon::parse($item->tgl_selesai);
+
+                $a = $tgl_selesai->diffInDays($tgl_mulai);
+                $a = $a + 1;
+                $tampung = (int) $tampung + $a;
             }
 
-            $jmlCutiTahunan = ModelsCuti::where('user_id', $this->idnya)->where('status_st', 'STATUS_ST_02')->where('cuti_tp', 'CUTI_TP_01')->count();
-            $jmlCutiTanpaSuratDokter = ModelsCuti::where('user_id', $this->idnya)->where('status_st', 'STATUS_ST_02')->where('cuti_tp', 'CUTI_TP_03')->count();
+            $jml_cuti_tahunan = (int) $tampung + (int) $cekCutiSatuHari;
 
-            $kuotaCutiTahunan = $cutiTahunan - $jmlCutiTahunan;
-            $kuotaCutiTanpaSuratDokter = 3 - $jmlCutiTanpaSuratDokter;
+            $jml_cuti_tanpa_surat_dokter = ModelsCuti::where('user_id', $this->idnya)
+                ->whereYear('tgl_mulai', date('Y'))
+                ->where('cuti_tp', 'CUTI_TP_03')
+                ->where('status_st', 'STATUS_ST_02')
+                ->count();
+
+            $user = User::find($this->idnya);
+
+            //jika partimer kuota 6
+            if ($user->status_pekerjaan_id == 2) {
+                $kuota_cuti_tahunan = $this->kuotaPegawaiPartimer - $jml_cuti_tahunan;
+            } else {
+                $kuota_cuti_tahunan = $this->kuotaPegawaiTetap - $jml_cuti_tahunan;
+            }
+
+            $kuota_cuti_tanpa_surat_dokter = 3 - $jml_cuti_tanpa_surat_dokter;
+
+
+
+            // $data->where('user_id', $this->idnya);
+
+            // $user = User::find($this->idnya);
+            // //partimer jumlah cuti tahunan
+            // if ($user->status_pekerjaan_id == 2) {
+            //     $cutiTahunan = 6;
+            // } else {
+            //     $cutiTahunan = 12;
+            // }
+
+            // $jmlCutiTahunan = ModelsCuti::where('user_id', $this->idnya)->where('status_st', 'STATUS_ST_02')->where('cuti_tp', 'CUTI_TP_01')->count();
+            // $jmlCutiTanpaSuratDokter = ModelsCuti::where('user_id', $this->idnya)->where('status_st', 'STATUS_ST_02')->where('cuti_tp', 'CUTI_TP_03')->count();
+
+            // $kuotaCutiTahunan = $cutiTahunan - $jmlCutiTahunan;
+            // $kuotaCutiTanpaSuratDokter = 3 - $jmlCutiTanpaSuratDokter;
+
+
         }
 
         $data = $data->orderBy('created_at', 'desc')->paginate(10);
@@ -256,8 +320,8 @@ class Cuti extends Component
         return view('livewire.master.cuti', [
             'post' => $data,
             'pegawai' => $this->ambilPegawai(),
-            'kuotaCutiTahunan' => $kuotaCutiTahunan,
-            'kuotaCutiTanpaSuratDokter' => $kuotaCutiTanpaSuratDokter,
+            'kuotaCutiTahunan' => $kuota_cuti_tahunan,
+            'kuotaCutiTanpaSuratDokter' => $kuota_cuti_tanpa_surat_dokter,
         ]);
     }
 }

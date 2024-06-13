@@ -19,8 +19,8 @@ class DashboardController extends Controller
     public function index()
     {
         if (auth()->user()->hasRole(['superadmin', 'direktur'])) {
-            $laki = User::where('jk', 'l')->count();
-            $perempuan = User::where('jk', 'p')->count();
+            $laki = User::where('jk', 'l')->where('status', '1')->count();
+            $perempuan = User::where('jk', 'p')->where('status', '1')->count();
             $total = User::whereHas('jabatan')->where('status', '1')->count();
 
             $jml_diterima_gapok = Gaji::whereYear('tanggal_penggajian', date('Y'))->sum('jml_diterima_gapok');

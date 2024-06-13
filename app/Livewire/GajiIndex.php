@@ -47,7 +47,7 @@ class GajiIndex extends Component
     }
     public function render()
     {
-        $data = User::whereHas('jabatan')->cari($this->cari)->get();
+        $data = User::whereHas('jabatan')->where('status', 1)->cari($this->cari)->get();
 
         return view('livewire.gaji-index', [
             'posts' => $data
