@@ -356,6 +356,7 @@
                                                                             <th>Nama</th>
                                                                             <th>Cuti</th>
                                                                             <th>Status</th>
+                                                                            <th></th>
                                                                             <th>Aksi</th>
                                                                         </thead>
                                                                         <tbody>
@@ -387,6 +388,17 @@
                                                                                         @endif
                                                                                         {{ $item->status->code_nm ?? '' }}</span>
 
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @if ($item->persetujuan)
+                                                                                            @foreach ($item->persetujuan as $list)
+                                                                                                <span
+                                                                                                    class="badge bg-dark">{{ $list->pegawai->name ?? '' }}</span>
+                                                                                            @endforeach
+                                                                                        @else
+                                                                                            -
+                                                                                        @endif
+                                                                                        {{-- {{ $item->persetujuan->pegawai->name ?? '-' }} --}}
                                                                                     </td>
                                                                                     <td>
                                                                                         <div

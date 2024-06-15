@@ -10,4 +10,9 @@ class PersetujuanCuti extends Model
     use HasFactory;
     public $guarded = [];
 
+    public function pegawai()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

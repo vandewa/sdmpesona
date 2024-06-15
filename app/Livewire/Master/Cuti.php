@@ -58,7 +58,7 @@ class Cuti extends Component
 
     public function ambilStatus()
     {
-        return ComCode::where('code_group', 'STATUS_ST')->get()->toArray();
+        return ComCode::where('code_group', 'STATUS_ST')->where('com_cd', '!=', 'STATUS_ST_01')->get()->toArray();
     }
 
     public function ambilCutiAlasanPenting()
@@ -248,7 +248,7 @@ class Cuti extends Component
         //filter berdasarkan jenis pengumpulan
         if ($this->idnya) {
 
-            $data->where('user_id', $this->idnya);  
+            $data->where('user_id', $this->idnya);
 
             // Hitung jumlah cuti tahunan
             $cekCutiSatuHari = ModelsCuti::where('status_st', 'STATUS_ST_02')
@@ -292,25 +292,6 @@ class Cuti extends Component
             }
 
             $kuota_cuti_tanpa_surat_dokter = 3 - $jml_cuti_tanpa_surat_dokter;
-
-
-
-            // $data->where('user_id', $this->idnya);
-
-            // $user = User::find($this->idnya);
-            // //partimer jumlah cuti tahunan
-            // if ($user->status_pekerjaan_id == 2) {
-            //     $cutiTahunan = 6;
-            // } else {
-            //     $cutiTahunan = 12;
-            // }
-
-            // $jmlCutiTahunan = ModelsCuti::where('user_id', $this->idnya)->where('status_st', 'STATUS_ST_02')->where('cuti_tp', 'CUTI_TP_01')->count();
-            // $jmlCutiTanpaSuratDokter = ModelsCuti::where('user_id', $this->idnya)->where('status_st', 'STATUS_ST_02')->where('cuti_tp', 'CUTI_TP_03')->count();
-
-            // $kuotaCutiTahunan = $cutiTahunan - $jmlCutiTahunan;
-            // $kuotaCutiTanpaSuratDokter = 3 - $jmlCutiTanpaSuratDokter;
-
 
         }
 
