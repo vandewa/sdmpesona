@@ -151,6 +151,7 @@ class User extends Component
         ]);
 
         $this->form['nama_jabatan_sekarang_id'] = $this->form['nama_jabatan_id'];
+        $this->form['tingkat_pekerjaan_sekarang_id'] = $this->form['tingkat_pekerjaan_awal_id'];
         $this->form['password'] = bcrypt($this->form['password']);
         $a = ModelsUser::create($this->form);
         $a->addrole($this->role);
