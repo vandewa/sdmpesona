@@ -133,7 +133,7 @@
                       @endif
 
                       @if (auth()->user()->hasRole(['direktur', 'superadmin']))
-                          {{-- <li class="nav-item">
+                          <li class="nav-item">
                               <a href="{{ route('penilaian-silang') }}"
                                   class="nav-link  {{ Request::segment(1) == 'penilaian-silang' ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-pencil"></i>
@@ -141,7 +141,7 @@
                                       Penilaian Silang Direksi
                                   </p>
                               </a>
-                          </li> --}}
+                          </li>
                       @endif
 
 
