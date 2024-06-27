@@ -99,7 +99,7 @@
                       @endif
 
                       @if (auth()->user()->hasRole(['superadmin']))
-                          {{-- <li class="nav-item">
+                          <li class="nav-item">
                               <a href="{{ route('kpi-penilaian-index') }}"
                                   class="nav-link  {{ Request::segment(1) == 'kpi-penilaian-index' ? 'active' : '' }}{{ Request::segment(1) == 'kpi-penilaian' ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-pencil"></i>
@@ -107,7 +107,7 @@
                                       KPI Penilaian Direksi
                                   </p>
                               </a>
-                          </li> --}}
+                          </li>
                       @endif
 
                       {{-- //ketua dewas --}}
