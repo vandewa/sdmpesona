@@ -60,7 +60,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-center">
-                                                    @if ($cekValidasi)
+                                                    @if (!$cekValidasi)
                                                         <button type="button" class="btn btn-danger btn-md "
                                                             wire:click="simpan"><i
                                                                 class="fa-solid fa-square-check mr-2"></i>Klik untuk

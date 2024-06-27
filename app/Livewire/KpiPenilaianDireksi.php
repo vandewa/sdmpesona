@@ -30,10 +30,8 @@ class KpiPenilaianDireksi extends Component
 
         $this->cekBulan = KpiPenilaian::whereMonth('bulan', $this->bulan)->whereYear('bulan', $this->tahun)->first();
         if ($this->cekBulan) {
-            dd('a');
             $this->cekValidasi = true;
         } else {
-            dd('b');
             $this->cekValidasi = false;
         }
 
