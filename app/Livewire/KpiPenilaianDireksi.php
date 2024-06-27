@@ -15,7 +15,7 @@ class KpiPenilaianDireksi extends Component
 
     use WithPagination;
 
-    public $idnya, $bulan, $tahun, $bulannya, $cekValidasi;
+    public $idnya, $bulan, $tahun, $bulannya, $cekValidasi, $cekBulan;
 
 
     public function mount($id = '')
@@ -28,7 +28,12 @@ class KpiPenilaianDireksi extends Component
 
         $this->bulannya = $carbonDate->isoFormat('MMMM Y');
 
-        $this->cekValidasi = KpiPenilaian::whereMonth('bulan', $this->bulan)->whereYear('bulan', $this->tahun)->first();
+        $this->cekBulan = KpiPenilaian::whereMonth('bulan', $this->bulan)->whereYear('bulan', $this->tahun)->first();
+        if ($this->cekBulan) {
+            $this->cekValidasi = true;
+        } else {
+            $this->cekValidasi = false;
+        }
 
     }
 
