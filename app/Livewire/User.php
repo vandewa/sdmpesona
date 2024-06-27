@@ -150,6 +150,7 @@ class User extends Component
             'form.tunjangan_masa_kerja_id' => 'required',
         ]);
 
+        $this->form['nama_jabatan_sekarang_id'] = $this->form['nama_jabatan_id'];
         $this->form['password'] = bcrypt($this->form['password']);
         $a = ModelsUser::create($this->form);
         $a->addrole($this->role);

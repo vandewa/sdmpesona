@@ -112,7 +112,7 @@
 
                       {{-- //ketua dewas --}}
                       @if (auth()->user()->hasRole(['ketua']) && auth()->user()->status == 1)
-                          {{-- <li class="nav-item">
+                          <li class="nav-item">
                               <a href="{{ route('kpi-penilaian-index') }}"
                                   class="nav-link  {{ Request::segment(1) == 'kpi-penilaian-index' ? 'active' : '' }}{{ Request::segment(1) == 'kpi-penilaian' ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-pencil"></i>
@@ -120,7 +120,7 @@
                                       KPI Penilaian Direksi
                                   </p>
                               </a>
-                          </li> --}}
+                          </li>
                           <li class="nav-item">
                               <a href="{{ route('password') }}"
                                   class="nav-link  {{ Request::segment(1) == 'ganti-password' ? 'active' : '' }}">
