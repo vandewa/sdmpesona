@@ -29,9 +29,11 @@ class KpiPenilaianDireksi extends Component
         $this->bulannya = $carbonDate->isoFormat('MMMM Y');
 
         $this->cekBulan = KpiPenilaian::whereMonth('bulan', $this->bulan)->whereYear('bulan', $this->tahun)->first();
-        if ($this->cekBulan) {
+        if (count($this->cekBulan)) {
+            dd('a');
             $this->cekValidasi = true;
         } else {
+            dd('b');
             $this->cekValidasi = false;
         }
 
