@@ -70,8 +70,17 @@ class KpiPenilaianDireksi extends Component
             text: 'Data berhasil divalidasi!',
             icon: 'success',
             confirmButtonText: "OK"
-            })
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $wire.kembali()
+            }
+          })
         JS);
+    }
+
+    public function kembali()
+    {
+        return redirect(route('kpi-penilaian', $this->idnya));
     }
 
     public function cetak()

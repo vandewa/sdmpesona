@@ -264,6 +264,42 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+
+                                                <div x-data="{ uploading: false, progress: 0 }"
+                                                    x-on:livewire-upload-start="uploading = true"
+                                                    x-on:livewire-upload-finish="uploading = false"
+                                                    x-on:livewire-upload-cancel="uploading = false"
+                                                    x-on:livewire-upload-error="uploading = false"
+                                                    x-on:livewire-upload-progress="progress = $event.detail.progress">
+                                                    <div>
+                                                        @if ($form['path_tanda_tangan'])
+                                                            <img src="{{ asset(str_replace('public', 'storage', $form['path_tanda_tangan'])) }}"
+                                                                style="max-width: 200px;">
+                                                        @endif
+                                                    </div>
+
+                                                    <div>
+                                                        <span>Tanda Tangan</span>
+                                                        <input type="file" wire:model='ttd' class="form-control"
+                                                            accept="image/*">
+                                                        @error('ttd')
+                                                            <span class="form-text text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                        <div x-show="uploading">
+                                                            <progress max="100"
+                                                                x-bind:value="progress"></progress>
+                                                            <span x-text="progress"><!-- Will output: "bar" -->
+                                                            </span> %
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        @if ($ttd)
+                                                            <img src="{{ $ttd->temporaryUrl() }}"
+                                                                style="max-width: 200px;">
+                                                        @endif
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="form-check mb-3 mt-3">

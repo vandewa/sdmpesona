@@ -18,7 +18,8 @@ class Profil extends Component
     use WithFileUploads;
 
     public $idHapus, $edit = false, $idnya, $cari, $listKawin, $listPendidikan, $password, $password_confirmation;
-    public $photo;
+
+    public $photo, $ttd;
 
     public $jabatan, $idKaryawan, $status, $nama, $check = false;
 
@@ -37,11 +38,12 @@ class Profil extends Component
         'bank' => null,
         'rekening' => null,
         'path_foto' => null,
+        'path_tanda_tangan' => null,
     ];
 
     public function mount()
     {
-        $data = User::with(['jabatan', 'statusnya', 'tingkat'])->find(auth()->user()->id)->only('id', 'name', 'ktp', 'npwp', 'jk', 'tgl_lahir', 'email', 'alamat', 'telpon', 'kawin_tp', 'anak', 'tunjangan_pendidikan_id', 'bank', 'rekening', 'path_foto');
+        $data = User::with(['jabatan', 'statusnya', 'tingkat'])->find(auth()->user()->id)->only('id', 'name', 'ktp', 'npwp', 'jk', 'tgl_lahir', 'email', 'alamat', 'telpon', 'kawin_tp', 'anak', 'tunjangan_pendidikan_id', 'bank', 'rekening', 'path_foto', 'path_tanda_tangan');
 
         $user = User::with(['jabatan', 'statusnya', 'tingkat'])->find(auth()->user()->id);
 
@@ -74,6 +76,11 @@ class Profil extends Component
         if ($this->photo) {
             $foto = $this->photo->store('sdmpesona/foto', 'gcs');
             $this->form['path_foto'] = $foto;
+        }
+
+        if ($this->ttd) {
+            $ttd = $this->ttd->store('sdmpesona/foto', 'gcs');
+            $this->form['path_tanda_tangan'] = $ttd;
         }
 
         User::find($this->idnya)->update($this->form);

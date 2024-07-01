@@ -47,6 +47,22 @@ class LihatGaji extends Component
             'jumlah_tunjangan' => \Laraindo\RupiahFormat::currency($data->jml_diterima_tunjangan) ?? '-',
         ]);
 
+        if ($bendahara->path_tanda_tangan) {
+            $templateProcessor->setImageValue('ttd_bendahara', [
+                'path' => storage_path('app/' . $bendahara->path_tanda_tangan) ?? "noimage.png",
+                'height' => 50,
+                'ratio' => false
+            ]);
+        }
+
+        if ($data->pegawai->path_tanda_tangan) {
+            $templateProcessor->setImageValue('ttd_penerima', [
+                'path' => storage_path('app/' . $data->pegawai->path_tanda_tangan) ?? "noimage.png",
+                'height' => 50,
+                'ratio' => false
+            ]);
+        }
+
         \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
         $templateProcessor->saveAs($pathSave);
 

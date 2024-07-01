@@ -641,46 +641,46 @@
                                                                                     @enderror
                                                                                 </div>
                                                                             </div>
-                                                                            @if ($form['nama_jabatan_sekarang_id'] == 11)
-                                                                                <div x-data="{ uploading: false, progress: 0 }"
-                                                                                    x-on:livewire-upload-start="uploading = true"
-                                                                                    x-on:livewire-upload-finish="uploading = false"
-                                                                                    x-on:livewire-upload-cancel="uploading = false"
-                                                                                    x-on:livewire-upload-error="uploading = false"
-                                                                                    x-on:livewire-upload-progress="progress = $event.detail.progress">
-                                                                                    <div>
-                                                                                        @if ($form['path_tanda_tangan'])
-                                                                                            <img src="{{ asset(str_replace('public', 'storage', $form['path_tanda_tangan'])) }}"
-                                                                                                style="max-width: 200px;">
-                                                                                        @endif
-                                                                                    </div>
+                                                                            {{-- @if ($form['nama_jabatan_sekarang_id'] == 11 || $form['nama_jabatan_sekarang_id'] == 7 || auth()->user()->id == 2) --}}
+                                                                            <div x-data="{ uploading: false, progress: 0 }"
+                                                                                x-on:livewire-upload-start="uploading = true"
+                                                                                x-on:livewire-upload-finish="uploading = false"
+                                                                                x-on:livewire-upload-cancel="uploading = false"
+                                                                                x-on:livewire-upload-error="uploading = false"
+                                                                                x-on:livewire-upload-progress="progress = $event.detail.progress">
+                                                                                <div>
+                                                                                    @if ($form['path_tanda_tangan'])
+                                                                                        <img src="{{ asset(str_replace('public', 'storage', $form['path_tanda_tangan'])) }}"
+                                                                                            style="max-width: 200px;">
+                                                                                    @endif
+                                                                                </div>
 
-                                                                                    <div>
-                                                                                        <span>Tanda Tangan</span>
-                                                                                        <input type="file"
-                                                                                            wire:model='photo'
-                                                                                            class="form-control"
-                                                                                            accept="image/*">
-                                                                                        @error('photo')
-                                                                                            <span
-                                                                                                class="form-text text-danger">{{ $message }}</span>
-                                                                                        @enderror
-                                                                                        <div x-show="uploading">
-                                                                                            <progress max="100"
-                                                                                                x-bind:value="progress"></progress>
-                                                                                            <span
-                                                                                                x-text="progress"><!-- Will output: "bar" -->
-                                                                                            </span> %
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        @if ($photo)
-                                                                                            <img src="{{ $photo->temporaryUrl() }}"
-                                                                                                style="max-width: 200px;">
-                                                                                        @endif
+                                                                                <div>
+                                                                                    <span>Tanda Tangan</span>
+                                                                                    <input type="file"
+                                                                                        wire:model='photo'
+                                                                                        class="form-control"
+                                                                                        accept="image/*">
+                                                                                    @error('photo')
+                                                                                        <span
+                                                                                            class="form-text text-danger">{{ $message }}</span>
+                                                                                    @enderror
+                                                                                    <div x-show="uploading">
+                                                                                        <progress max="100"
+                                                                                            x-bind:value="progress"></progress>
+                                                                                        <span
+                                                                                            x-text="progress"><!-- Will output: "bar" -->
+                                                                                        </span> %
                                                                                     </div>
                                                                                 </div>
-                                                                            @endif
+                                                                                <div>
+                                                                                    @if ($photo)
+                                                                                        <img src="{{ $photo->temporaryUrl() }}"
+                                                                                            style="max-width: 200px;">
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            {{-- @endif --}}
                                                                         </div>
                                                                     </div>
 
