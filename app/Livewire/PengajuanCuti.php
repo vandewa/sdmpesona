@@ -91,8 +91,8 @@ class PengajuanCuti extends Component
 
         $this->validate([
             'form.cuti_tp' => 'required',
-            'form.tgl_mulai' => 'required|date|after_or_equal:today',
-            'form.tgl_selesai' => 'required|date|after_or_equal:tgl_mulai',
+            // 'form.tgl_mulai' => 'required|date|after_or_equal:today',
+            // 'form.tgl_selesai' => 'required|date|after_or_equal:tgl_mulai',
             'form.keterangan' => 'required',
         ]);
 
