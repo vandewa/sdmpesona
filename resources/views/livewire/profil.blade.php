@@ -279,7 +279,7 @@
                                                     </div>
 
                                                     <div>
-                                                        <span>Tanda Tangan</span>
+                                                        <span><b>Tanda Tangan</b></span>
                                                         <input type="file" wire:model='ttd' class="form-control"
                                                             accept="image/*">
                                                         @error('ttd')

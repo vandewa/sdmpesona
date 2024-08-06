@@ -650,7 +650,10 @@
                                                                                 x-on:livewire-upload-progress="progress = $event.detail.progress">
                                                                                 <div>
                                                                                     @if ($form['path_tanda_tangan'])
-                                                                                        <img src="{{ route('helper.show-picture', ['path' => $form['path_tanda_tangan']]) }}"
+                                                                                        {{-- <img src="{{ route('helper.show-picture', ['path' => $form['path_tanda_tangan']]) }}"
+                                                                                            style="max-width: 200px;"> --}}
+
+                                                                                        <img src="{{ asset(str_replace('public', 'storage', $form['path_tanda_tangan'])) }}"
                                                                                             style="max-width: 200px;">
                                                                                     @endif
                                                                                 </div>
