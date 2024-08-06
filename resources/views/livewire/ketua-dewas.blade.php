@@ -109,7 +109,9 @@
                                                                             <div class="mb-2 row">
                                                                                 <div>
                                                                                     @if ($form['path_tanda_tangan'] && !$photo)
-                                                                                        <img src="{{ asset(str_replace('public', 'storage', $form['path_tanda_tangan'])) }}"
+                                                                                        {{-- <img src="{{ asset(str_replace('public', 'storage', $form['path_tanda_tangan'])) }}"
+                                                                                            style="max-height: 200px;"> --}}
+                                                                                        <img src="{{ route('helper.show-picture', ['path' => $form['path_tanda_tangan']]) }}"
                                                                                             style="max-height: 200px;">
                                                                                     @endif
                                                                                 </div>

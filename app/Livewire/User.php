@@ -177,7 +177,9 @@ class User extends Component
         }
 
         if ($this->photo) {
-            $foto = $this->photo->store('public/foto', 'local');
+            // $foto = $this->photo->store('public/foto', 'local');
+            $foto = $this->photo->store('sdmpesona/foto', 'gcs');
+
             $this->form['path_tanda_tangan'] = $foto;
         }
 

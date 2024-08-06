@@ -650,13 +650,13 @@
                                                                                 x-on:livewire-upload-progress="progress = $event.detail.progress">
                                                                                 <div>
                                                                                     @if ($form['path_tanda_tangan'])
-                                                                                        <img src="{{ asset(str_replace('public', 'storage', $form['path_tanda_tangan'])) }}"
+                                                                                        <img src="{{ route('helper.show-picture', ['path' => $form['path_tanda_tangan']]) }}"
                                                                                             style="max-width: 200px;">
                                                                                     @endif
                                                                                 </div>
 
                                                                                 <div>
-                                                                                    <span>Tanda Tangan</span>
+                                                                                    <span><b>Tanda Tangan</b></span>
                                                                                     <input type="file"
                                                                                         wire:model='photo'
                                                                                         class="form-control"
