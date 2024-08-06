@@ -61,7 +61,9 @@ class KetuaDewas extends Component
 
         $this->form['password'] = bcrypt('password');
         if ($this->photo) {
-            $foto = $this->photo->store('public/foto', 'local');
+            // $foto = $this->photo->store('public/foto', 'local');
+            $foto = $this->photo->store('sdmpesona/foto', 'gcs');
+
             $this->form['path_tanda_tangan'] = $foto;
         }
 
@@ -72,7 +74,7 @@ class KetuaDewas extends Component
     public function storeUpdate()
     {
         if ($this->photo) {
-            $foto = $this->photo->store('public/foto', 'local');
+            $foto = $this->photo->store('sdmpesona/foto', 'gcs');
 
             User::find($this->idHapus)->update([
                 'path_tanda_tangan' => $foto,
