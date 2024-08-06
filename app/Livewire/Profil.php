@@ -79,7 +79,9 @@ class Profil extends Component
         }
 
         if ($this->ttd) {
-            $ttd = $this->ttd->store('sdmpesona/foto', 'gcs');
+            // $ttd = $this->ttd->store('sdmpesona/foto', 'gcs');
+            $ttd = $this->ttd->store('public/foto', 'local');
+
             $this->form['path_tanda_tangan'] = $ttd;
         }
 
