@@ -332,8 +332,8 @@ class PengajuanCuti extends Component
             ->where('status_st', 'STATUS_ST_02')
             ->count();
 
-        //jika partimer kuota 6
-        if (auth()->user()->status_pekerjaan_id == 2) {
+        //jika partimer 
+        if (auth()->user()->tingkat_pekerjaan_sekarang_id == 4) {
             $kuota_cuti_tahunan = $this->kuotaPegawaiPartimer - $jml_cuti_tahunan;
         } else {
             $kuota_cuti_tahunan = $this->kuotaPegawaiTetap - $jml_cuti_tahunan;
